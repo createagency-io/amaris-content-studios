@@ -53,7 +53,8 @@ function initReveals() {
         ease: 'power3.out',
         stagger: 0.09,
         overwrite: true,
-        clearProps: 'transform',
+        // the CSS start state (opacity 0, 28px down) must not come back when the tween ends,
+        // so the finished values stay inline instead of being cleared
       }),
   });
 }
