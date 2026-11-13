@@ -46,7 +46,8 @@ html.full .hero {
   position: absolute;
   left: var(--pad);
   right: var(--pad);
-  bottom: 0;
+  /* pinned to the top and sized to the small viewport, so the text never moves when a phone's toolbar collapses */
+  top: 0;
   height: var(--vh-safe);
   display: flex;
   flex-direction: column;

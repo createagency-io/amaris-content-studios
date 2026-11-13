@@ -73,6 +73,8 @@ html {
   color-scheme: dark;
   scrollbar-color: var(--gold-deep) var(--night);
   scrollbar-width: thin;
+  /* keep the scrollbar's space reserved so the page never re-wraps when scrolling unlocks after the loader */
+  scrollbar-gutter: stable;
 }
 
 html.is-locked,
