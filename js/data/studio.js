@@ -13,6 +13,8 @@ export const STUDIO = {
   tiktok: 'amarisstudios.ng',
   email: 'contact@theamarisstudio.com',
   address: 'Zanna Estate, along Benin–Auchi Expressway, Ekpoma, Edo State, Nigeria',
+  // where clients pay to secure a booking (shown on the booking pass and in the WhatsApp message)
+  payment: { bank: 'Moniepoint', account: '9026259819', name: 'Amaris Studio' },
   maps: 'https://www.google.com/maps/search/?api=1&query=Zanna+Estate%2C+Benin-Auchi+Expressway%2C+Ekpoma%2C+Edo+State%2C+Nigeria',
 };
 

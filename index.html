@@ -24,18 +24,18 @@
     <link rel="preload" href="assets/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="assets/fonts/outfit-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/loader.css" />
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/hero.css" />
-    <link rel="stylesheet" href="css/about.css" />
-    <link rel="stylesheet" href="css/rooms.css" />
-    <link rel="stylesheet" href="css/gallery.css" />
-    <link rel="stylesheet" href="css/pricing.css" />
-    <link rel="stylesheet" href="css/rules.css" />
-    <link rel="stylesheet" href="css/booking.css" />
-    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/fonts.css?v=4" />
+    <link rel="stylesheet" href="css/base.css?v=4" />
+    <link rel="stylesheet" href="css/loader.css?v=4" />
+    <link rel="stylesheet" href="css/nav.css?v=4" />
+    <link rel="stylesheet" href="css/hero.css?v=4" />
+    <link rel="stylesheet" href="css/about.css?v=4" />
+    <link rel="stylesheet" href="css/rooms.css?v=4" />
+    <link rel="stylesheet" href="css/gallery.css?v=4" />
+    <link rel="stylesheet" href="css/pricing.css?v=4" />
+    <link rel="stylesheet" href="css/rules.css?v=4" />
+    <link rel="stylesheet" href="css/booking.css?v=4" />
+    <link rel="stylesheet" href="css/contact.css?v=4" />
 
     <script>
       // Flag JS as available before first paint, and never let the loader trap the page.
@@ -46,7 +46,7 @@
     </script>
     <link rel="modulepreload" href="vendor/gsap.min.js" />
     <link rel="modulepreload" href="vendor/lenis.min.js" />
-    <script type="module" src="js/main.js?v=3"></script>
+    <script type="module" src="js/main.js?v=4"></script>
   </head>
 
   <body>
@@ -412,6 +412,17 @@
                   <span>Estimated total</span>
                   <strong class="display" data-ticket="total">&#8358;0</strong>
                   <small data-ticket="note">Final total is confirmed by the studio on WhatsApp.</small>
+                </div>
+                <div class="ticket__pay">
+                  <p class="eyebrow">Pay to secure your date</p>
+                  <div class="ticket__pay-row">
+                    <div>
+                      <strong class="ticket__pay-acct" data-pay="account">9026259819</strong>
+                      <span><span data-pay="bank">Moniepoint</span> · <span data-pay="name">Amaris Studio</span></span>
+                    </div>
+                    <button class="ticket__pay-copy" type="button" data-pay-copy aria-label="Copy account number">Copy</button>
+                  </div>
+                  <small>Pay after the studio confirms your slot on WhatsApp.</small>
                 </div>
                 <div class="ticket__tear" aria-hidden="true"></div>
                 <div class="ticket__msg">

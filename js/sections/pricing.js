@@ -109,6 +109,10 @@ export function initPricing({ env, scroll }) {
     section.classList.toggle('is-flat', flat());
     const panel = panels.find((p) => !p.hidden);
     const inners = qsa('.pcard__inner', panel);
+    inners.forEach((inner) => {
+      inner._showBack = undefined;
+      inner.classList.remove('is-flipped');
+    });
     if (flat()) {
       gsap.set(inners, { clearProps: 'transform' });
       return;
@@ -152,6 +156,13 @@ export function initPricing({ env, scroll }) {
         // lift slightly mid-flip so the card clears its neighbours
         const lift = Math.sin(t * Math.PI);
         gsap.set(inner, { rotationY: 180 * t, z: lift * 46, scale: 1 - lift * 0.035 });
+        // iOS Safari ignores backface-visibility on layered children, so the mirrored
+        // front face bleeds through the price face. Hide whichever face points away.
+        const showBack = t >= 0.5;
+        if (inner._showBack !== showBack) {
+          inner._showBack = showBack;
+          inner.classList.toggle('is-flipped', showBack);
+        }
       });
     }
     render(deck);

@@ -64,7 +64,8 @@
     content: '';
     position: absolute;
     z-index: -1;
-    top: -9px;
+    /* reaches up under the see-through nav so scrolled cards never peek between nav and tabs */
+    top: calc(-9px - var(--nav-h));
     bottom: -14px;
     left: calc(var(--pad) * -1);
     right: calc(var(--pad) * -1);
@@ -166,6 +167,20 @@
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
+}
+
+/* only one face is ever drawn: pricing.js adds .is-flipped once the card turns past 90deg.
+   This avoids the mirrored text bleed-through iOS Safari shows with backface-visibility alone. */
+.pcard__face--back {
+  visibility: hidden;
+}
+
+.pcard__inner.is-flipped .pcard__face--front {
+  visibility: hidden;
+}
+
+.pcard__inner.is-flipped .pcard__face--back {
+  visibility: visible;
 }
 
 .pcard__face {
@@ -457,6 +472,7 @@ html.lite .pcard__face--front,
 
 html.lite .pcard__face--back,
 .pricing.is-flat .pcard__face--back {
+  visibility: visible;
   position: relative;
   transform: none;
   box-shadow: none;

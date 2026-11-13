@@ -96,7 +96,9 @@ export function initBooking({ env }) {
     if (q) lines.push(`Estimated total: ${naira(q.total)}${q.extraHour ? ' plus the extra hour' : ''}`);
     if (sel.name) lines.push(`Name: ${sel.name}`);
     if (sel.notes) lines.push('', `Notes: ${sel.notes}`);
-    lines.push('', 'Please confirm availability. Thank you!');
+    const pay = STUDIO.payment;
+    lines.push('', 'Payment details:', `Account number: ${pay.account}`, `Bank: ${pay.bank}`, `Account name: ${pay.name}`);
+    lines.push('', 'Please confirm availability and I will send payment to this account. Thank you!');
     return lines.join('\n');
   }
 
@@ -201,6 +203,27 @@ export function initBooking({ env }) {
       label.textContent = 'Press copy';
     }
     setTimeout(() => (label.textContent = 'Copy message'), 2200);
+  });
+
+  /* ---------- payment details: filled from studio.js, one-tap copy of the account number ---------- */
+  for (const key of ['account', 'bank', 'name']) {
+    const el = qs(`[data-pay="${key}"]`);
+    if (el) el.textContent = STUDIO.payment[key];
+  }
+  const payCopy = qs('[data-pay-copy]');
+  payCopy?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(STUDIO.payment.account);
+      payCopy.textContent = 'Copied';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(qs('[data-pay="account"]'));
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      payCopy.textContent = 'Selected';
+    }
+    setTimeout(() => (payCopy.textContent = 'Copy'), 2000);
   });
 
   /* ---------- pre-fill from "Book this room" buttons elsewhere on the page ---------- */

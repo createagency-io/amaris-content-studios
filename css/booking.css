@@ -485,6 +485,65 @@
   color: var(--text-soft);
 }
 
+/* payment details */
+.ticket__pay {
+  margin-top: 1.2rem;
+  padding: 0.95rem 1rem 0.9rem;
+  border: 1px solid rgba(199, 163, 93, 0.35);
+  border-radius: 14px;
+  background: rgba(199, 163, 93, 0.07);
+}
+
+.ticket__pay-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 0.45rem;
+}
+
+.ticket__pay-acct {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 6vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--cream);
+}
+
+.ticket__pay-row span {
+  font-size: 0.86rem;
+  color: var(--text-soft);
+}
+
+.ticket__pay-copy {
+  flex: none;
+  min-height: 40px;
+  padding: 0 1rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: background-color 0.3s var(--ease-out);
+}
+
+.ticket__pay-copy:hover,
+.ticket__pay-copy:focus-visible {
+  background: rgba(199, 163, 93, 0.14);
+}
+
+.ticket__pay small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
 /* perforation */
 .ticket__tear {
   position: relative;
