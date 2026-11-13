@@ -41,6 +41,7 @@ export function initBooking({ env }) {
   const ticket = (key) => qs(`[data-ticket="${key}"]`);
   const sendBtn = ticket('send');
   const copyBtn = ticket('copy');
+  const sendLabel = qs('[data-send-label]', sendBtn);
   let touched = false; // errors only show after the visitor has tried to send
 
   /* ---------- render the dynamic parts ---------- */
@@ -138,7 +139,14 @@ export function initBooking({ env }) {
     ticket('title').textContent = sel.rooms.length ? listRooms(sel.rooms) : 'Your session';
 
     const total = q ? q.total : 0;
-    if (env.reducedMotion) ticket('total').textContent = naira(total);
+    const totalEl = ticket('total');
+    totalEl.classList.toggle('is-empty', !q);
+    if (!q) {
+      // no room yet: no fake ₦0, just a dash until there is something to price
+      gsap.killTweensOf(shownTotal);
+      shownTotal.value = 0;
+      totalEl.textContent = '—';
+    } else if (env.reducedMotion) totalEl.textContent = naira(total);
     else {
       gsap.to(shownTotal, {
         value: total,
@@ -149,15 +157,24 @@ export function initBooking({ env }) {
         onComplete: () => (ticket('total').textContent = naira(total)),
       });
     }
-    ticket('note').textContent = q?.extraHour
+    ticket('note').textContent = !q
+      ? 'Pick a room to see your price.'
+      : q.extraHour
       ? `Plus your extra hour, with ${naira(10000)} off. The studio confirms the final total on WhatsApp.`
-      : sel.extra === '30' && q
+      : sel.extra === '30'
         ? `Includes ${naira(q.addOn)} for the extra 30 minutes. Final total is confirmed on WhatsApp.`
         : 'Final total is confirmed by the studio on WhatsApp.';
 
     message = buildMessage(sel, q);
     ticket('message').textContent = message;
-    sendBtn.href = waLink(message);
+
+    // the button only becomes a real WhatsApp link once a room and a date are chosen
+    const ready = sel.rooms.length > 0 && !!sel.date;
+    sendBtn.href = ready ? waLink(message) : '#book';
+    sendBtn.setAttribute('aria-disabled', String(!ready));
+    sendBtn.classList.toggle('is-waiting', !ready);
+    sendLabel.textContent = ready ? 'Send on WhatsApp' : !sel.rooms.length ? 'Choose a room first' : 'Choose a date first';
+    copyBtn.disabled = !ready;
 
     if (touched) validate(sel);
     return sel;
@@ -182,6 +199,7 @@ export function initBooking({ env }) {
     const result = validate(update());
     if (result.ok) return; // the link opens WhatsApp with the message
     e.preventDefault();
+    e.stopImmediatePropagation(); // keep the smooth-scroll "#book" handler out of it
     const target = result.missingRoom ? roompick : dateInput;
     target.scrollIntoView({ block: 'center', behavior: env.reducedMotion ? 'auto' : 'smooth' });
     if (!result.missingRoom) dateInput.focus({ preventScroll: true });

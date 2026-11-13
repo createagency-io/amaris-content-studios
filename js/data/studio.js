@@ -28,7 +28,7 @@ export const naira = (n) => `₦${Number(n).toLocaleString('en-NG')}`;
 /** Path to an optimised photo. Widths available: 480, 800, 1600. */
 export const img = (name, width = 800) => `assets/img/${name}-${width}.webp`;
 
-/** Photo library (all pulled from the brand's Figma file). ratio = width / height. */
+/** Photo library (brand Figma file, plus recent shots from the studio's Instagram). ratio = width / height. */
 export const PHOTOS = {
   'portrait-golden-arch': { ratio: 0.75, alt: 'Portrait of a woman in a white gown inside a golden arch alcove' },
   'minimalist-black-jumpsuit': { ratio: 0.75, alt: 'Fashion editorial in a black jumpsuit, Minimalist Room' },
@@ -38,6 +38,11 @@ export const PHOTOS = {
   'ile-oba-couple': { ratio: 0.75, alt: 'Couple in traditional attire, Ile Oba Room' },
   'ile-oba-agbada': { ratio: 0.75, alt: 'Cultural portrait in a red agbada, Ile Oba Room' },
   'ile-oba-edo-royal': { ratio: 0.75, alt: 'Royal portrait in traditional Edo attire, Ile Oba Room' },
+  'emerald-red-graduate': { ratio: 0.75, alt: 'Graduate in a red dress kneeling by the bookshelves, Emerald Room' },
+  'minimalist-christmas': { ratio: 0.75, alt: 'Christmas pyjama shoot beside a decorated tree, Minimalist Room' },
+  'minimalist-mirror-glam': { ratio: 0.75, alt: 'Glam portrait in a sequin dress at the arched mirror, Minimalist Room' },
+  'ile-oba-nurse-graduate': { ratio: 0.75, alt: 'Nursing graduate in an olive suit seated by the plaster niches, Ile Oba Room' },
+  'emerald-white-graduate': { ratio: 0.75, alt: 'Graduate in a white suit beside the lit bookshelves, Emerald Room' },
   'room-minimalist-arches': { ratio: 0.5627, alt: 'Minimalist Room with white arch shelving and a bouclé chair' },
   'room-emerald-shelves': { ratio: 0.5627, alt: 'Emerald Room with LED-lit bookshelves, ring chandelier and cream sofa' },
   'room-emerald-panels': { ratio: 0.5627, alt: 'Emerald Room with a panelled green wall and abstract paintings' },
@@ -101,17 +106,22 @@ export const roomById = (id) => ROOMS.find((r) => r.id === id);
 export const GALLERY = [
   { photo: 'portrait-golden-arch', caption: 'Portrait in the golden arch alcove', tag: 'Portrait' },
   { photo: 'room-ile-oba-niches', caption: 'Ile Oba Room — curved plaster niches and artefacts', tag: 'The space' },
-  { photo: 'ile-oba-couple', caption: 'Couple session in traditional attire, Ile Oba Room', tag: 'Couples' },
-  { photo: 'room-emerald-shelves', caption: 'Emerald Room — LED-lit shelves and ring chandelier', tag: 'The space' },
-  { photo: 'minimalist-black-jumpsuit', caption: 'Fashion editorial, Minimalist Room', tag: 'Fashion' },
-  { photo: 'ile-oba-agbada', caption: 'Cultural portrait in red agbada, Ile Oba Room', tag: 'Cultural' },
+  { photo: 'emerald-red-graduate', caption: 'Graduation shoot in red, Emerald Room', tag: 'Graduation' },
   { photo: 'room-minimalist-arches', caption: 'Minimalist Room — white arch shelving wall', tag: 'The space' },
-  { photo: 'minimalist-duo-white', caption: 'Fashion session for two, Minimalist Room', tag: 'Fashion' },
+  { photo: 'minimalist-christmas', caption: 'Christmas shoot, Minimalist Room', tag: 'Seasonal' },
+  { photo: 'room-emerald-shelves', caption: 'Emerald Room — LED-lit shelves and ring chandelier', tag: 'The space' },
+  { photo: 'minimalist-mirror-glam', caption: 'Glam at the arched mirror, Minimalist Room', tag: 'Fashion' },
+  { photo: 'ile-oba-couple', caption: 'Couple session in traditional attire, Ile Oba Room', tag: 'Couples' },
   { photo: 'room-ile-oba-dresser', caption: 'Ile Oba Room — gold-framed art and carved dresser', tag: 'The space' },
-  { photo: 'ile-oba-edo-royal', caption: 'Royal portrait in traditional Edo attire, Ile Oba Room', tag: 'Cultural' },
+  { photo: 'ile-oba-nurse-graduate', caption: 'Nursing graduate portrait, Ile Oba Room', tag: 'Graduation' },
+  { photo: 'minimalist-black-jumpsuit', caption: 'Fashion editorial, Minimalist Room', tag: 'Fashion' },
   { photo: 'room-emerald-panels', caption: 'Emerald Room — panelled wall with abstract art', tag: 'The space' },
-  { photo: 'minimalist-red-set', caption: 'Content shoot in red, Minimalist Room', tag: 'Creators' },
+  { photo: 'emerald-white-graduate', caption: 'Graduation portrait in white, Emerald Room', tag: 'Graduation' },
+  { photo: 'ile-oba-agbada', caption: 'Cultural portrait in red agbada, Ile Oba Room', tag: 'Cultural' },
+  { photo: 'minimalist-duo-white', caption: 'Fashion session for two, Minimalist Room', tag: 'Fashion' },
   { photo: 'room-ile-oba-full', caption: 'Ile Oba Room — full view with pendant lamp', tag: 'The space' },
+  { photo: 'ile-oba-edo-royal', caption: 'Royal portrait in traditional Edo attire, Ile Oba Room', tag: 'Cultural' },
+  { photo: 'minimalist-red-set', caption: 'Content shoot in red, Minimalist Room', tag: 'Creators' },
   { photo: 'emerald-white-blazer', caption: 'Portrait session in white, Emerald Room', tag: 'Portrait' },
 ];
 

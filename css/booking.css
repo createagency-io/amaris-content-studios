@@ -485,6 +485,22 @@
   color: var(--text-soft);
 }
 
+/* send button before a room and date are chosen */
+.ticket__actions .btn.is-waiting {
+  filter: saturate(0.35);
+  opacity: 0.72;
+  box-shadow: none;
+}
+
+.ticket__actions .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ticket__total strong.is-empty {
+  color: var(--text-faint);
+}
+
 /* payment details */
 .ticket__pay {
   margin-top: 1.2rem;
