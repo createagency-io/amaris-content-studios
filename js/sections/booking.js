@@ -3,10 +3,10 @@
  * right updates live with an estimate and the exact WhatsApp message, and the
  * send button opens WhatsApp with that message pre-filled to the studio.
  */
-import { gsap } from '../vendor.js';
-import { qs, qsa, fragment, esc, icon } from '../core/dom.js';
-import { pointer } from '../core/pointer.js';
-import { ROOMS, GROUPS, PACKAGES, STUDIO, quote, naira, img, waLink, roomById, COUPLE_DURATION } from '../data/studio.js';
+import { gsap } from '../vendor.js?v=5';
+import { qs, qsa, fragment, esc, icon } from '../core/dom.js?v=5';
+import { pointer } from '../core/pointer.js?v=5';
+import { ROOMS, GROUPS, PACKAGES, STUDIO, quote, naira, img, waLink, roomById, COUPLE_DURATION } from '../data/studio.js?v=5';
 
 const HINTS = {
   single: 'Choose one room, or combine two or three for more looks in one visit.',

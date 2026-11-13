@@ -4,8 +4,8 @@
  * Scroll: the lines split apart and parallax away while the camera pushes
  * through the 3D doorway (hero.scene.js).
  */
-import { gsap } from '../vendor.js';
-import { qs, qsa, splitChars } from '../core/dom.js';
+import { gsap } from '../vendor.js?v=5';
+import { qs, qsa, splitChars } from '../core/dom.js?v=5';
 
 export async function initHero({ env, stage }) {
   const section = qs('#home');
@@ -28,7 +28,7 @@ export async function initHero({ env, stage }) {
 
   /* ---------- 3D doorway + scroll choreography ---------- */
   if (!env.lite && stage) {
-    const { createHeroScene } = await import('./hero.scene.js');
+    const { createHeroScene } = await import('./hero.scene.js?v=5');
     const scene3d = createHeroScene({ stage, slot: qs('.stage-slot', section) });
     ready = scene3d.ready;
 

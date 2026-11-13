@@ -6,10 +6,10 @@
  * towards the cursor. gallery.js asks this module which panel is under the
  * pointer and where it sits on screen, so the lightbox can zoom out of it.
  */
-import * as THREE from '../core/three.js';
-import { coverUVs, glowTexture, glow, dust, revealWhenReady } from '../core/kit.js';
-import { pointer } from '../core/pointer.js';
-import { PHOTOS } from '../data/studio.js';
+import * as THREE from '../core/three.js?v=5';
+import { coverUVs, glowTexture, glow, dust, revealWhenReady } from '../core/kit.js?v=5';
+import { pointer } from '../core/pointer.js?v=5';
+import { PHOTOS } from '../data/studio.js?v=5';
 
 const PANEL = { w: 2.3, h: 3.12, gap: 0.36 };
 const TURNS = 1.12; // how far the ring turns over the whole section

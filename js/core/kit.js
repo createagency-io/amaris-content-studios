@@ -2,8 +2,8 @@
  * Three.js building blocks shared by the hero, rooms and gallery scenes:
  * arch geometry, plaster / glow textures, floating dust and framed photos.
  */
-import * as THREE from './three.js';
-import { gsap } from '../vendor.js';
+import * as THREE from './three.js?v=5';
+import { gsap } from '../vendor.js?v=5';
 
 /* ------------------------------------------------------------------ */
 /* Arches                                                              */

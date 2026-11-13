@@ -2,9 +2,9 @@
  * 3. About — photo cards drift at different depths and the whole cloud tilts
  * with the cursor. On phones it follows the gyroscope instead (iOS asks first).
  */
-import { gsap, ScrollTrigger } from '../vendor.js';
-import { qs, qsa } from '../core/dom.js';
-import { pointer, requestGyro, gyroNeedsPermission } from '../core/pointer.js';
+import { gsap, ScrollTrigger } from '../vendor.js?v=5';
+import { qs, qsa } from '../core/dom.js?v=5';
+import { pointer, requestGyro, gyroNeedsPermission } from '../core/pointer.js?v=5';
 
 export function initAbout({ env }) {
   const section = qs('#about');

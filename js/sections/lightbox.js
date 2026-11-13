@@ -3,9 +3,9 @@
  * screen rectangle (the panel on the 3D ring, or a thumbnail in lite mode).
  * Arrow keys / buttons / swipe move between photos, Esc closes.
  */
-import { gsap } from '../vendor.js';
-import { qs, qsa } from '../core/dom.js';
-import { PHOTOS, img } from '../data/studio.js';
+import { gsap } from '../vendor.js?v=5';
+import { qs, qsa } from '../core/dom.js?v=5';
+import { PHOTOS, img } from '../data/studio.js?v=5';
 
 export function createLightbox({ env, scroll }, items, { rectFor, onChange } = {}) {
   const el = qs('#lightbox');

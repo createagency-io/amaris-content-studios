@@ -115,3 +115,12 @@ For link previews on WhatsApp and Instagram, change the `og:image` address in `i
 - Photography, logo and brand: Amaris Studio.
 - [three.js](https://threejs.org) (MIT), [GSAP + ScrollTrigger](https://gsap.com) (GSAP standard licence), [Lenis](https://lenis.darkroom.engineering) (MIT).
 - Fonts: Fraunces and Outfit (SIL Open Font License).
+
+## Making sure visitors see your changes
+
+Phones cache scripts and styles for a while. Every script import and stylesheet link ends in `?v=5`.
+After you change any JS or CSS file, bump that number everywhere in one go, for example from the repo folder:
+
+```bash
+grep -rl "?v=5" index.html js | xargs sed -i "s/?v=5/?v=6/g"
+```

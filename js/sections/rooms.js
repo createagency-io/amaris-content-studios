@@ -4,9 +4,9 @@
  * through the three arches while each room's card, price and "Book this room"
  * button fade in as you arrive.
  */
-import { gsap } from '../vendor.js';
-import { qs, qsa, fragment, esc } from '../core/dom.js';
-import { ROOMS, PHOTOS, naira, img, COUPLE_DURATION } from '../data/studio.js';
+import { gsap } from '../vendor.js?v=5';
+import { qs, qsa, fragment, esc } from '../core/dom.js?v=5';
+import { ROOMS, PHOTOS, naira, img, COUPLE_DURATION } from '../data/studio.js?v=5';
 
 function roomCard(room, i) {
   const side = i % 2 === 0 ? 'right' : 'left'; // opposite the room's cover photo in 3D
@@ -66,7 +66,7 @@ export async function initRooms({ env, stage, scroll }) {
     new Promise((r) => setTimeout(r, 2500)),
   ]).catch(() => {});
 
-  const { createRoomsScene } = await import('./rooms.scene.js');
+  const { createRoomsScene } = await import('./rooms.scene.js?v=5');
   const hall = createRoomsScene({ stage, slot: qs('.stage-slot', section), rooms: ROOMS });
 
   const steps = qs('.rooms__steps', section);

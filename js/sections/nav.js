@@ -2,8 +2,8 @@
  * Navigation — smooth anchor scrolling, scrolled state, active link and the
  * full-screen menu on phones.
  */
-import { ScrollTrigger } from '../vendor.js';
-import { qs, qsa } from '../core/dom.js';
+import { ScrollTrigger } from '../vendor.js?v=5';
+import { qs, qsa } from '../core/dom.js?v=5';
 
 export function initNav({ scroll }) {
   const nav = qs('#nav');

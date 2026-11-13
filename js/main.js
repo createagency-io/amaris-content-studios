@@ -8,22 +8,22 @@
  *   4. initialise every section module (one file per section in /sections)
  *   5. when the hero is ready, swing the loader doors open
  */
-import { gsap, ScrollTrigger } from './vendor.js';
-import { env, downgradeToLite } from './core/env.js';
-import { initScroll } from './core/scroll.js';
-import { initPointer } from './core/pointer.js';
-import { qsa, icon } from './core/dom.js';
+import { gsap, ScrollTrigger } from './vendor.js?v=5';
+import { env, downgradeToLite } from './core/env.js?v=5';
+import { initScroll } from './core/scroll.js?v=5';
+import { initPointer } from './core/pointer.js?v=5';
+import { qsa, icon } from './core/dom.js?v=5';
 
-import { initLoader } from './sections/loader.js';
-import { initNav } from './sections/nav.js';
-import { initHero } from './sections/hero.js';
-import { initAbout } from './sections/about.js';
-import { initRooms } from './sections/rooms.js';
-import { initGallery } from './sections/gallery.js';
-import { initPricing } from './sections/pricing.js';
-import { initRules } from './sections/rules.js';
-import { initBooking } from './sections/booking.js';
-import { initContact } from './sections/contact.js';
+import { initLoader } from './sections/loader.js?v=5';
+import { initNav } from './sections/nav.js?v=5';
+import { initHero } from './sections/hero.js?v=5';
+import { initAbout } from './sections/about.js?v=5';
+import { initRooms } from './sections/rooms.js?v=5';
+import { initGallery } from './sections/gallery.js?v=5';
+import { initPricing } from './sections/pricing.js?v=5';
+import { initRules } from './sections/rules.js?v=5';
+import { initBooking } from './sections/booking.js?v=5';
+import { initContact } from './sections/contact.js?v=5';
 
 const root = document.documentElement;
 
@@ -62,7 +62,7 @@ function initReveals() {
 async function createStageSafely() {
   if (env.lite) return null;
   try {
-    const { createStage } = await import('./core/stage.js');
+    const { createStage } = await import('./core/stage.js?v=5');
     return createStage(env);
   } catch (err) {
     console.warn('[amaris] WebGL unavailable, using the lite experience.', err);

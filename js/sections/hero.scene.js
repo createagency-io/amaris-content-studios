@@ -6,7 +6,7 @@
  * `state.progress` (0 → 1, driven by scroll in hero.js) dollies the camera
  * through the doorway, around the photo and on through a second arch into the light.
  */
-import * as THREE from '../core/three.js';
+import * as THREE from '../core/three.js?v=5';
 import {
   archWallGeometry,
   archTrimGeometry,
@@ -17,8 +17,8 @@ import {
   dust,
   revealWhenReady,
   surface,
-} from '../core/kit.js';
-import { pointer } from '../core/pointer.js';
+} from '../core/kit.js?v=5';
+import { pointer } from '../core/pointer.js?v=5';
 
 const POINTED = 0.34;
 const DOOR = { w: 3.3, h: 5.5, depth: 0.9 };

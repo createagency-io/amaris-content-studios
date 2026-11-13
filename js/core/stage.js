@@ -7,10 +7,10 @@
  * layer is on screen, moves the canvas into that layer's slot and renders it.
  * Nothing is rendered while no 3D section is visible.
  */
-import * as THREE from './three.js';
-import { gsap } from '../vendor.js';
-import { img } from '../data/studio.js';
-import { debounce } from './dom.js';
+import * as THREE from './three.js?v=5';
+import { gsap } from '../vendor.js?v=5';
+import { img } from '../data/studio.js?v=5';
+import { debounce } from './dom.js?v=5';
 
 export function createStage(env) {
   const low = env.tier === 'low';
