@@ -1,0 +1,551 @@
+/* ==========================================================================
+   8. Book Now — choose package, room and date; a live "booking pass" shows
+   the estimate and the WhatsApp message that will be sent (booking.js).
+   ========================================================================== */
+
+.booking {
+  position: relative;
+  padding: clamp(5.5rem, 14vh, 10rem) var(--pad);
+  background: linear-gradient(180deg, var(--night) 0%, #140c07 45%, #0d0805 100%);
+  overflow: hidden;
+}
+
+.booking__glow {
+  position: absolute;
+  left: -20%;
+  bottom: -30%;
+  width: min(1000px, 110vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(199, 163, 93, 0.16) 0%, rgba(168, 112, 42, 0.05) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.booking__inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.booking__head {
+  max-width: 44rem;
+}
+
+.booking__head h2 {
+  margin: 1.3rem 0 1.4rem;
+}
+
+.booking__head > p:last-child {
+  max-width: 32rem;
+  color: var(--text-soft);
+}
+
+.booking__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin-top: clamp(2.5rem, 7vh, 4.5rem);
+}
+
+@media (min-width: 1024px) {
+  .booking__grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    align-items: start;
+  }
+}
+
+/* ---------- form ---------- */
+
+.bform {
+  display: grid;
+  gap: clamp(1.8rem, 4vh, 2.6rem);
+}
+
+.bform__step {
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+
+.bform legend {
+  float: left;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.35rem, 3.6vw, 1.8rem);
+  letter-spacing: -0.015em;
+}
+
+.bform legend + * {
+  clear: both;
+}
+
+.bform legend span {
+  font-family: var(--font-body);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--gold);
+}
+
+.bform__blurb,
+.bform__hint {
+  font-size: 0.92rem;
+  color: var(--text-soft);
+}
+
+.bform__blurb {
+  margin-top: 0.9rem;
+}
+
+.bform__hint {
+  margin-bottom: 1rem;
+}
+
+/* segmented control */
+.seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.45fr;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(248, 246, 242, 0.03);
+}
+
+.seg label {
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.seg input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.seg span {
+  display: grid;
+  place-items: center;
+  min-height: 46px;
+  padding: 0 0.4rem;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-soft);
+  border-radius: 999px;
+  transition: color 0.4s var(--ease-out), background-color 0.4s var(--ease-out);
+}
+
+.seg input:checked + span {
+  color: var(--ink);
+  background: linear-gradient(120deg, #d6b572 0%, var(--gold) 55%, #b08a45 100%);
+}
+
+.seg input:focus-visible + span {
+  outline: 1.5px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+/* room picker */
+.roompick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.5rem, 1.6vw, 1rem);
+}
+
+.roompick__item {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.roompick__item input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.roompick__card {
+  position: relative;
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(248, 246, 242, 0.12);
+  background: var(--cocoa);
+  transition: border-color 0.4s var(--ease-out), transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+
+.roompick__card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: saturate(0.75) brightness(0.72);
+  transition: filter 0.6s var(--ease-out), transform 0.9s var(--ease-out);
+}
+
+.roompick__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(9, 6, 4, 0.92) 0%, rgba(9, 6, 4, 0) 58%);
+}
+
+.roompick__text {
+  position: absolute;
+  z-index: 1;
+  left: clamp(0.55rem, 1.8vw, 1rem);
+  right: clamp(0.55rem, 1.8vw, 1rem);
+  bottom: clamp(0.55rem, 1.8vw, 0.95rem);
+}
+
+.roompick__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 3.2vw, 1.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.roompick__price {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: clamp(0.72rem, 2.2vw, 0.86rem);
+  color: var(--gold-light);
+}
+
+.roompick__check {
+  position: absolute;
+  z-index: 1;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--gold);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.roompick__item input:checked + .roompick__card {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold), 0 24px 50px -22px rgba(199, 163, 93, 0.5);
+  transform: translateY(-4px);
+}
+
+.roompick__item input:checked + .roompick__card img {
+  filter: none;
+  transform: scale(1.05);
+}
+
+.roompick__item input:checked + .roompick__card .roompick__check {
+  transform: scale(1);
+}
+
+.roompick__item input:focus-visible + .roompick__card {
+  outline: 1.5px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .roompick__item:hover .roompick__card img {
+    filter: saturate(0.95) brightness(0.9);
+  }
+}
+
+/* fields */
+.bform__row {
+  display: grid;
+  gap: 1.1rem;
+  margin-bottom: 1.1rem;
+}
+
+@media (min-width: 620px) {
+  .bform__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.bform__field {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+}
+
+.bform__size {
+  margin-top: 1.2rem;
+  max-width: 22rem;
+}
+
+.bform__field label {
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.bform__field label i {
+  font-style: normal;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+}
+
+.bform__field small {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.bform input[type='text'],
+.bform input[type='date'],
+.bform input[type='time'],
+.bform select,
+.bform textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--cream);
+  background: rgba(248, 246, 242, 0.04);
+  border: 1px solid rgba(248, 246, 242, 0.14);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.35s, background-color 0.35s, box-shadow 0.35s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.bform textarea {
+  min-height: 86px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.bform select {
+  padding-right: 2.6rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23c7a35d' stroke-width='1.5'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.bform select option {
+  color: #140c05;
+  background: var(--cream);
+}
+
+.bform ::placeholder {
+  color: var(--text-faint);
+}
+
+.bform input::-webkit-calendar-picker-indicator {
+  filter: invert(0.75) sepia(0.6) saturate(2.4) hue-rotate(2deg);
+  cursor: pointer;
+}
+
+.bform input:focus,
+.bform select:focus,
+.bform textarea:focus {
+  border-color: var(--gold);
+  background-color: rgba(199, 163, 93, 0.06);
+  box-shadow: 0 0 0 4px rgba(199, 163, 93, 0.12);
+}
+
+.bform [aria-invalid='true'] {
+  border-color: #e0876a;
+}
+
+.bform__error {
+  font-size: 0.84rem;
+  color: #f0a58c;
+}
+
+.bform__step > .bform__error {
+  margin-top: 0.8rem;
+}
+
+/* ---------- booking pass ---------- */
+
+.ticket {
+  position: relative;
+  perspective: 1400px;
+}
+
+@media (min-width: 1024px) {
+  .ticket {
+    position: sticky;
+    top: calc(var(--nav-h) + 3vh);
+  }
+}
+
+.ticket__card {
+  position: relative;
+  padding: clamp(1.4rem, 4vw, 2.1rem);
+  background:
+    radial-gradient(90% 50% at 100% 0%, rgba(199, 163, 93, 0.22) 0%, transparent 70%),
+    linear-gradient(165deg, #24160c 0%, #150c07 55%, #0e0805 100%);
+  border: 1px solid rgba(199, 163, 93, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.9);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.ticket__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ticket__mark {
+  flex: none;
+  width: 54px;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #f1dcab 0%, var(--gold) 45%, #8a6628 100%);
+  -webkit-mask: url('../assets/logo/as-mark.svg') center / contain no-repeat;
+  mask: url('../assets/logo/as-mark.svg') center / contain no-repeat;
+}
+
+.ticket__title {
+  margin-top: 0.25rem;
+  font-size: clamp(1.5rem, 4.4vw, 1.95rem);
+}
+
+.ticket__rows {
+  margin-top: 1.5rem;
+  display: grid;
+}
+
+.ticket__rows div {
+  display: grid;
+  grid-template-columns: 6.2rem 1fr;
+  gap: 1rem;
+  padding: 0.72rem 0;
+  border-top: 1px solid rgba(248, 246, 242, 0.08);
+}
+
+.ticket__rows dt {
+  padding-top: 0.22rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.ticket__rows dd {
+  font-size: 0.98rem;
+  color: var(--cream);
+}
+
+.ticket__rows dd.is-empty {
+  color: var(--text-faint);
+}
+
+.ticket__total {
+  margin-top: 0.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(199, 163, 93, 0.3);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 0.2rem 1rem;
+}
+
+.ticket__total span {
+  padding-bottom: 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.ticket__total strong {
+  font-size: clamp(2.3rem, 8vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket__total small {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+/* perforation */
+.ticket__tear {
+  position: relative;
+  height: 1px;
+  margin: 1.5rem calc(clamp(1.4rem, 4vw, 2.1rem) * -1);
+  background: repeating-linear-gradient(90deg, rgba(199, 163, 93, 0.45) 0 8px, transparent 8px 16px);
+}
+
+.ticket__tear::before,
+.ticket__tear::after {
+  content: '';
+  position: absolute;
+  top: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #110a06;
+  border: 1px solid rgba(199, 163, 93, 0.3);
+}
+
+.ticket__tear::before {
+  left: -12px;
+  clip-path: inset(0 0 0 50%);
+}
+
+.ticket__tear::after {
+  right: -12px;
+  clip-path: inset(0 50% 0 0);
+}
+
+.ticket__msg pre {
+  margin-top: 0.8rem;
+  max-height: 13.5rem;
+  overflow: auto;
+  padding: 0.95rem 1.05rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: rgba(248, 246, 242, 0.86);
+  background: rgba(47, 143, 111, 0.13);
+  border: 1px solid rgba(98, 207, 168, 0.2);
+  border-radius: 4px 16px 16px 16px;
+  scrollbar-width: thin;
+}
+
+.ticket__actions {
+  margin-top: 1.3rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.ticket__to {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--text-faint);
+}
+
+.ticket__to strong {
+  font-weight: 400;
+  color: var(--text-soft);
+}

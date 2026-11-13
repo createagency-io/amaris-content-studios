@@ -1,0 +1,472 @@
+/* ==========================================================================
+   4. Rooms — the page becomes a 3D hallway (rooms.scene.js). The section is
+   many screens tall; the sticky block holds the canvas plus one glass card per
+   room that fades in while the camera dwells in that room (rooms.js).
+   ========================================================================== */
+
+.rooms {
+  position: relative;
+  background: var(--night);
+  --grade: #0b0705;
+}
+
+html.full .rooms {
+  height: calc(var(--vh-full) * 7.6);
+}
+
+.rooms__sticky {
+  position: sticky;
+  top: 0;
+  height: var(--vh-full);
+  overflow: hidden;
+  background: var(--night);
+}
+
+/* per-room colour grade laid over the 3D + a cinematic vignette */
+.rooms__grade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8, 5, 3, 0.62) 0%, rgba(8, 5, 3, 0) 22%),
+    radial-gradient(115% 95% at 50% 46%, rgba(8, 5, 3, 0) 48%, rgba(8, 5, 3, 0.62) 100%);
+}
+
+.rooms__grade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grade);
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+}
+
+/* ---------- intro title (shown while approaching the first arch) ---------- */
+
+.rooms__intro {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  top: 0;
+  height: var(--vh-safe);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.rooms__intro h2 {
+  margin-top: 1.3rem;
+  font-size: clamp(2.8rem, 8.4vw, 7rem);
+  text-shadow: 0 4px 60px rgba(8, 5, 3, 0.75);
+}
+
+.rooms__intro-note {
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+/* ---------- room cards ---------- */
+
+.rooms__cards {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--vh-safe);
+  display: grid;
+  padding: calc(var(--nav-h) + 1rem) var(--pad) clamp(4.6rem, 9vh, 6rem);
+  pointer-events: none;
+}
+
+/* every card sits in the same grid cell; only the current room's card is visible */
+.room-card {
+  --accent: var(--gold);
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: center;
+  width: 100%;
+  max-width: 30rem;
+  pointer-events: auto;
+}
+
+html.full .room-card {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.room-card__media {
+  display: none;
+}
+
+.room-card__body {
+  position: relative;
+  padding: clamp(1.25rem, 3.4vw, 2.1rem);
+  background: linear-gradient(160deg, rgba(20, 13, 8, 0.82) 0%, rgba(10, 7, 5, 0.86) 100%);
+  border: 1px solid rgba(248, 246, 242, 0.1);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+}
+
+.room-card__body::before {
+  content: '';
+  position: absolute;
+  left: clamp(1.25rem, 3.4vw, 2.1rem);
+  top: -1px;
+  width: 64px;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 22px 2px var(--accent);
+}
+
+.room-card__index {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+}
+
+.room-card__index span {
+  color: var(--text-faint);
+}
+
+.room-card__name {
+  margin-top: 0.55rem;
+  font-size: clamp(2.3rem, 7.4vw, 3.5rem);
+}
+
+.room-card__name em {
+  color: var(--accent);
+}
+
+.room-card__tagline {
+  margin-top: 0.6rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.6vw, 1.14rem);
+  color: var(--cream);
+}
+
+.room-card__desc {
+  margin-top: 0.8rem;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+.room-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.room-card__tags li {
+  padding: 0.32rem 0.75rem 0.3rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border: 1px solid rgba(248, 246, 242, 0.14);
+  border-radius: 999px;
+}
+
+.room-card__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.4rem;
+  margin-top: 1.3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(248, 246, 242, 0.1);
+}
+
+.room-card__price .eyebrow {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--text-faint);
+}
+
+.room-card__price strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.room-card__price small {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* phones: a compact card so the 3D room stays visible above it */
+@media (max-width: 899px) {
+  html.full .room-card__body {
+    padding: 1.1rem 1.15rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  html.full .room-card__name {
+    margin-top: 0.35rem;
+    font-size: clamp(1.9rem, 8.6vw, 2.6rem);
+  }
+
+  html.full .room-card__tagline {
+    margin-top: 0.3rem;
+    font-size: 0.98rem;
+  }
+
+  html.full .room-card__desc {
+    margin-top: 0.5rem;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  html.full .room-card__tags {
+    display: none;
+  }
+
+  html.full .room-card__foot {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+  }
+
+  html.full .room-card__price strong {
+    font-size: 1.85rem;
+  }
+
+  html.full .room-card__price small {
+    font-size: 0.74rem;
+    white-space: nowrap;
+  }
+
+  html.full .room-card__price .eyebrow {
+    font-size: 0.54rem;
+    letter-spacing: 0.22em;
+    white-space: nowrap;
+  }
+
+  html.full .room-card__foot .btn {
+    flex: none;
+    min-height: 2.9rem;
+    padding: 0.7rem 1.05rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (max-width: 899px) and (min-height: 760px) {
+  html.full .room-card__desc {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+
+  html.full .room-card__tags {
+    display: flex;
+  }
+}
+
+@media (min-width: 900px) {
+  .rooms__cards {
+    padding: calc(var(--nav-h) + 1rem) clamp(2rem, 6vw, 6.5rem) clamp(4.6rem, 9vh, 6rem);
+  }
+
+  .room-card {
+    align-self: center;
+    width: min(33rem, 38vw);
+    max-width: none;
+  }
+
+  .room-card[data-side='right'] {
+    justify-self: end;
+  }
+
+  .room-card[data-side='left'] {
+    justify-self: start;
+  }
+}
+
+/* phones held sideways: card to the side, details trimmed */
+@media (max-height: 480px) and (max-width: 899px) {
+  html.full .rooms__cards {
+    padding-bottom: 1rem;
+  }
+
+  html.full .room-card {
+    align-self: center;
+    justify-self: end;
+    max-width: 21rem;
+  }
+
+  html.full .room-card__desc,
+  html.full .room-card__tags {
+    display: none;
+  }
+
+  html.full .rooms__steps {
+    left: var(--pad);
+    transform: none;
+  }
+}
+
+/* ---------- room stepper ---------- */
+
+.rooms__steps {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--vh-full) - var(--vh-safe) + clamp(1.1rem, 3vh, 2rem));
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  background: rgba(10, 7, 5, 0.6);
+  border: 1px solid rgba(248, 246, 242, 0.1);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.rooms__steps button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-soft);
+  border-radius: 999px;
+  transition: color 0.4s var(--ease-out), background-color 0.4s var(--ease-out);
+}
+
+.rooms__steps button i {
+  font-style: normal;
+  color: var(--text-faint);
+  transition: color 0.4s;
+}
+
+.rooms__steps button[aria-current='true'] {
+  color: var(--ink);
+  background: var(--gold);
+}
+
+.rooms__steps button[aria-current='true'] i {
+  color: rgba(9, 9, 9, 0.6);
+}
+
+.rooms__veil {
+  position: absolute;
+  inset: 0;
+  background: var(--night);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- lite fallback: three stacked room features ---------- */
+
+html.lite .rooms {
+  padding: clamp(5rem, 12vh, 9rem) var(--pad);
+}
+
+html.lite .rooms__sticky {
+  position: relative;
+  height: auto;
+  overflow: visible;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  background: none;
+}
+
+html.lite .rooms__grade,
+html.lite .rooms__steps,
+html.lite .rooms__veil {
+  display: none;
+}
+
+html.lite .rooms__intro,
+html.lite .rooms__cards {
+  position: relative;
+  left: auto;
+  right: auto;
+  height: auto;
+  pointer-events: auto;
+}
+
+html.lite .rooms__intro {
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+html.lite .rooms__intro-note {
+  display: none;
+}
+
+html.lite .rooms__cards {
+  display: grid;
+  gap: clamp(3rem, 8vh, 6rem);
+  padding: 0;
+}
+
+html.lite .room-card {
+  grid-area: auto;
+  justify-self: stretch;
+  width: auto;
+  max-width: none;
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+html.lite .room-card__media {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 0.6rem;
+}
+
+html.lite .room-card__media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+html.lite .room-card__media img:first-child {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+@media (min-width: 900px) {
+  html.lite .room-card {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  html.lite .room-card:nth-child(even) .room-card__media {
+    order: 2;
+  }
+}

@@ -1,0 +1,161 @@
+/* ==========================================================================
+   1. Loader — a dark amber double door carrying the AS mark. It swings open
+   into the site (js/sections/loader.js).
+   ========================================================================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+  background: transparent;
+}
+
+html.no-js .loader,
+html.loader-skip .loader {
+  display: none;
+}
+
+.loader__door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.2%;
+  overflow: hidden;
+  background-color: #170d06;
+  background-image: radial-gradient(120% 85% at 50% 42%, #4a2a12 0%, #2a170a 34%, #150b05 68%, #0a0503 100%);
+  background-size: 200% 100%;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.loader__door--l {
+  left: 0;
+  transform-origin: 0% 50%;
+  background-position: 0% 0;
+  box-shadow: inset -1px 0 0 rgba(199, 163, 93, 0.22);
+}
+
+.loader__door--r {
+  right: 0;
+  transform-origin: 100% 50%;
+  background-position: 100% 0;
+  box-shadow: inset 1px 0 0 rgba(199, 163, 93, 0.22);
+}
+
+/* each leaf falls into shadow as it swings away (--shade is animated by loader.js) */
+.loader__door::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #050302;
+  opacity: calc(var(--shade, 0) * 0.72);
+  pointer-events: none;
+}
+
+/* a hairline arch inlaid across both leaves */
+.loader__inlay {
+  position: absolute;
+  top: 9vh;
+  bottom: -2px;
+  width: min(34vw, 300px);
+  border: 1px solid rgba(199, 163, 93, 0.28);
+  border-bottom: 0;
+}
+
+.loader__door--l .loader__inlay {
+  right: 0;
+  border-right: 0;
+  border-radius: 999px 0 0 0;
+}
+
+.loader__door--r .loader__inlay {
+  left: 0;
+  border-left: 0;
+  border-radius: 0 999px 0 0;
+}
+
+/* the brand is printed on both leaves and clipped at the seam, so it splits when the door opens */
+.loader__brand {
+  position: absolute;
+  top: 50%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  transform: translateY(-58%);
+}
+
+.loader__door--l .loader__brand {
+  left: 0;
+}
+
+.loader__door--r .loader__brand {
+  right: 0;
+}
+
+.loader__mark {
+  width: clamp(104px, 22vw, 168px);
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #f1dcab 0%, var(--gold) 42%, #8a6628 100%);
+  -webkit-mask: url('../assets/logo/as-mark.svg') center / contain no-repeat;
+  mask: url('../assets/logo/as-mark.svg') center / contain no-repeat;
+  filter: drop-shadow(0 0 34px rgba(227, 154, 69, 0.35));
+}
+
+.loader__name {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 242, 0.72);
+  white-space: nowrap;
+  padding-left: 0.42em;
+}
+
+/* light leaking through the gap between the doors */
+.loader__seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(180deg, transparent 0%, #ffd9a0 18%, #fff3dc 50%, #ffd9a0 82%, transparent 100%);
+  box-shadow: 0 0 28px 6px rgba(255, 190, 110, 0.55), 0 0 90px 22px rgba(227, 154, 69, 0.3);
+  transform: scaleY(0);
+  transform-origin: 50% 50%;
+  opacity: 0;
+}
+
+.loader__meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(2rem, 7vh, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(248, 246, 242, 0.55);
+}
+
+.loader__label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.loader__pct {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}

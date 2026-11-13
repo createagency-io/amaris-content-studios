@@ -1,0 +1,423 @@
+/* ==========================================================================
+   Amaris Content Studios — design tokens, reset, type and shared components
+   Palette and fonts come from the brand's Figma: gold #c7a35d, cream #f8f6f2,
+   ink #090909, Fraunces (display) + Outfit (body).
+   ========================================================================== */
+
+:root {
+  /* brand */
+  --ink: #090909;
+  --cream: #f8f6f2;
+  --gold: #c7a35d;
+
+  /* warm cinematic extensions */
+  --night: #0b0705;
+  --umber: #140c07;
+  --cocoa: #1e130b;
+  --brown: #3a2414;
+  --amber: #a8702a;
+  --amber-glow: #e39a45;
+  --gold-light: #e7cd96;
+  --gold-deep: #8f6f33;
+  --emerald: #2f8f6f;
+  --emerald-deep: #0f3a2e;
+  --emerald-bright: #62cfa8;
+
+  --text: var(--cream);
+  --text-soft: rgba(248, 246, 242, 0.68);
+  --text-faint: rgba(248, 246, 242, 0.42);
+  --line: rgba(199, 163, 93, 0.2);
+  --line-soft: rgba(248, 246, 242, 0.09);
+  --glass: rgba(14, 9, 6, 0.62);
+
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --pad: clamp(1.25rem, 5vw, 5rem);
+  --nav-h: 68px;
+  --maxw: 1320px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* 3D sections use the large viewport so the canvas never leaves a gap on phones */
+  --vh-full: 100vh;
+  --vh-safe: 100vh;
+}
+
+@supports (height: 100lvh) {
+  :root {
+    --vh-full: 100lvh;
+    --vh-safe: 100svh;
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --nav-h: 84px;
+  }
+}
+
+/* ---------- reset ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--night);
+  color-scheme: dark;
+  scrollbar-color: var(--gold-deep) var(--night);
+  scrollbar-width: thin;
+}
+
+html.is-locked,
+html.is-locked body {
+  overflow: hidden;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--night);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+fieldset,
+legend,
+pre {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+fieldset {
+  border: 0;
+  min-width: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* ---------- typography ---------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-optical-sizing: auto;
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+}
+
+.display em,
+em.display {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+}
+
+h2.display {
+  font-size: clamp(2.35rem, 5.6vw, 4.6rem);
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.icon {
+  flex: none;
+}
+
+.word,
+.char {
+  display: inline-block;
+}
+
+.only-touch,
+.only-lite {
+  display: none;
+}
+
+html.lite .only-lite {
+  display: inline;
+}
+
+html.lite .only-full {
+  display: none;
+}
+
+@media (hover: none) {
+  .only-hover {
+    display: none;
+  }
+  .only-touch {
+    display: inline;
+  }
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--cream);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  min-height: 3.4rem;
+  padding: 0.95rem 1.7rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.45s var(--ease-out), border-color 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--gold {
+  --btn-bg: linear-gradient(120deg, #d6b572 0%, var(--gold) 45%, #b08a45 100%);
+  --btn-fg: #140c05;
+  box-shadow: 0 10px 40px -12px rgba(199, 163, 93, 0.55);
+}
+
+.btn--gold::before {
+  background: var(--cream);
+}
+
+.btn--ghost {
+  border-color: rgba(248, 246, 242, 0.32);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.btn--ghost::before {
+  background: var(--cream);
+}
+
+.btn--sm {
+  min-height: 2.75rem;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.66rem;
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+@media (hover: hover) {
+  .btn:hover::before {
+    transform: translateY(0);
+  }
+  .btn--ghost:hover {
+    --btn-fg: var(--ink);
+    border-color: var(--cream);
+  }
+}
+
+/* ---------- global chrome ---------- */
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  padding: 0.75rem 1.1rem;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transform: translateY(-200%);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* film grain over everything */
+.grain {
+  position: fixed;
+  inset: -60px;
+  z-index: 900;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  animation: grain 0.9s steps(5) infinite;
+  will-change: transform;
+}
+
+@keyframes grain {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-22px, 14px, 0); }
+  40% { transform: translate3d(18px, -26px, 0); }
+  60% { transform: translate3d(-30px, -10px, 0); }
+  80% { transform: translate3d(26px, 24px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* the one WebGL canvas, moved between .stage-slot elements by js/core/stage.js */
+.stage-slot {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stage-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+html.lite .stage-slot {
+  display: none;
+}
+
+/* generic scroll reveal (js/main.js) */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js.reveals-off [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+.noscript {
+  position: fixed;
+  inset: auto 1rem 1rem;
+  z-index: 3000;
+  padding: 1rem 1.25rem;
+  background: var(--cocoa);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.noscript a {
+  color: var(--gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

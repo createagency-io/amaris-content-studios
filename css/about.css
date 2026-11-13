@@ -1,0 +1,265 @@
+/* ==========================================================================
+   3. About — studio intro beside a cloud of photo cards floating at
+   different depths. The cloud tilts with the cursor / phone (about.js).
+   ========================================================================== */
+
+.about {
+  position: relative;
+  padding: clamp(6rem, 16vh, 12rem) var(--pad) clamp(5rem, 12vh, 9rem);
+  background: linear-gradient(180deg, var(--night) 0%, #120a06 50%, var(--night) 100%);
+  overflow: hidden;
+}
+
+.about__glow {
+  position: absolute;
+  top: 12%;
+  right: -18%;
+  width: min(900px, 90vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(168, 112, 42, 0.3) 0%, rgba(168, 112, 42, 0.08) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.about__inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 7rem);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .about__inner {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+}
+
+/* ---------- copy ---------- */
+
+.about__title {
+  margin: 1.6rem 0 2rem;
+}
+
+.about__copy > p:not(.eyebrow) {
+  max-width: 34rem;
+  color: var(--text-soft);
+}
+
+.about__copy > p.about__lede {
+  margin-bottom: 1.1rem;
+  font-size: clamp(1.08rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--cream);
+}
+
+.about__features {
+  margin-top: 2.6rem;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 560px) {
+  .about__features {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.2rem;
+  }
+}
+
+.about__features li {
+  padding: 1.15rem 0 1.2rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.about__features strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.16rem;
+  letter-spacing: -0.01em;
+}
+
+.about__features span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+  color: var(--text-soft);
+}
+
+.about__stats {
+  margin-top: 2.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem clamp(2rem, 5vw, 4rem);
+}
+
+.about__stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.35rem;
+}
+
+.about__stats dd {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 4.4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+}
+
+.about__stats dt {
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ---------- floating photo cloud ---------- */
+
+.about__cloud {
+  position: relative;
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1.14;
+  perspective: 1100px;
+  order: -1;
+}
+
+@media (min-width: 960px) {
+  .about__cloud {
+    order: 0;
+  }
+}
+
+.about__cloud-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.acard {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  transform: translateZ(var(--z)) rotate(var(--r));
+  transform-style: preserve-3d;
+}
+
+.acard__par,
+.acard__drift {
+  will-change: transform;
+}
+
+.acard__drift {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--cocoa);
+  box-shadow: 0 40px 70px -28px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(248, 246, 242, 0.06);
+}
+
+.acard img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.acard--tall img {
+  aspect-ratio: 9 / 15;
+}
+
+.acard figcaption {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.7rem;
+  padding: 0.35rem 0.7rem 0.3rem;
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(9, 6, 4, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+}
+
+.about__gyro {
+  position: absolute;
+  left: 50%;
+  bottom: -1.2rem;
+  transform: translateX(-50%);
+  padding: 0.7rem 1.15rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--gold-light);
+  background: rgba(14, 9, 6, 0.8);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* ---------- ticker between About and Rooms ---------- */
+
+.ticker {
+  position: relative;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--night);
+  overflow: hidden;
+}
+
+.ticker__track {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.4rem, 3vw, 2.6rem);
+  width: max-content;
+  animation: ticker 46s linear infinite;
+}
+
+.ticker span {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: rgba(248, 246, 242, 0.86);
+}
+
+.ticker em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.ticker i {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(calc(-50% - clamp(0.7rem, 1.5vw, 1.3rem)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+  }
+}

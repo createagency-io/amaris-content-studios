@@ -1,0 +1,485 @@
+/* ==========================================================================
+   6. Pricing — tabs (Single / Couple / Family-Group) and a deck of sticky
+   cards. Each card sticks under the previous one and flips from its photo
+   face to its price face as you scroll (pricing.js).
+   ========================================================================== */
+
+.pricing {
+  --strip-h: 54px;
+  --tabs-h: 52px;
+  --stack-top: calc(var(--nav-h) + var(--tabs-h) + 22px);
+  --card-h: min(470px, calc(var(--vh-safe) - var(--stack-top) - 3 * var(--strip-h) - 22px));
+  --gap: 46vh;
+  position: relative;
+  padding: clamp(5.5rem, 14vh, 10rem) var(--pad) clamp(4rem, 10vh, 7rem);
+  background:
+    radial-gradient(60% 40% at 0% 0%, rgba(168, 112, 42, 0.16) 0%, transparent 100%),
+    linear-gradient(180deg, var(--night) 0%, #0f0906 100%);
+}
+
+.pricing__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* On phones the aside dissolves so the tab bar can stay sticky across the whole deck */
+.pricing__aside {
+  display: contents;
+}
+
+.pricing__head h2 {
+  margin: 1.3rem 0 1.4rem;
+}
+
+.pricing__lede {
+  max-width: 30rem;
+  color: var(--text-soft);
+}
+
+/* ---------- tabs ---------- */
+
+.pricing__tabs {
+  position: sticky;
+  top: calc(var(--nav-h) + 8px);
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  height: var(--tabs-h);
+  margin: 2.2rem 0 1.6rem;
+  padding: 4px;
+  background: rgba(16, 10, 6, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+}
+
+/* phones: a solid strip behind the pinned tab bar, so cards slide away cleanly beneath it */
+@media (max-width: 1023px) {
+  .pricing__tabs::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -9px;
+    bottom: -14px;
+    left: calc(var(--pad) * -1);
+    right: calc(var(--pad) * -1);
+    background: linear-gradient(180deg, #0f0906 0%, #0f0906 72%, rgba(15, 9, 6, 0) 100%);
+    pointer-events: none;
+  }
+}
+
+.pricing__tab {
+  position: relative;
+  z-index: 1;
+  padding: 0 0.4rem;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-soft);
+  border-radius: 999px;
+  transition: color 0.4s var(--ease-out), background-color 0.4s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pricing__tab[aria-selected='true'] {
+  color: var(--ink);
+  background: linear-gradient(120deg, #d6b572 0%, var(--gold) 55%, #b08a45 100%);
+}
+
+/* ---------- notes ---------- */
+
+.pricing__notes {
+  order: 3;
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 2.4rem;
+}
+
+@media (min-width: 620px) and (max-width: 1023px) {
+  .pricing__notes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pricing__notes li {
+  padding: 1.1rem 1.2rem 1.15rem;
+  border: 1px solid var(--line-soft);
+  border-left: 1px solid var(--gold-deep);
+  border-radius: 4px 14px 14px 4px;
+  background: rgba(248, 246, 242, 0.025);
+}
+
+.pricing__notes strong {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.08rem;
+  color: var(--gold-light);
+}
+
+.pricing__notes span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* ---------- the deck ---------- */
+
+.pricing__panels {
+  min-width: 0;
+}
+
+.pricing__panel[hidden] {
+  display: none;
+}
+
+.stack {
+  position: relative;
+  /* runway so the last card can finish its flip while still pinned */
+  padding-bottom: calc(var(--gap) * 0.7);
+}
+
+.pcard {
+  position: sticky;
+  top: calc(var(--stack-top) + var(--i) * var(--strip-h));
+  height: var(--card-h);
+  margin-bottom: var(--gap);
+  perspective: 1500px;
+}
+
+.pcard:last-child {
+  margin-bottom: 0;
+}
+
+.pcard__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.pcard__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 1px solid rgba(199, 163, 93, 0.2);
+  box-shadow: 0 -22px 50px -18px rgba(0, 0, 0, 0.85), 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+/* strip = the part of a card that stays visible once the next card stacks on top */
+.pcard__strip {
+  flex: none;
+  height: var(--strip-h);
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0 clamp(1.1rem, 3vw, 1.8rem);
+}
+
+.pcard__no {
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--gold);
+}
+
+.pcard__title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.14rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pcard__tag {
+  flex: none;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.pcard__tag--price {
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gold-light);
+}
+
+/* front: the photo */
+.pcard__face--front {
+  background: var(--cocoa);
+}
+
+.pcard__face--front img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+
+.pcard__face--front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(9, 6, 4, 0.9) 0%, rgba(9, 6, 4, 0.2) 30%, rgba(9, 6, 4, 0.12) 46%, rgba(9, 6, 4, 0.94) 100%);
+}
+
+.pcard__face--front .pcard__strip,
+.pcard__face--front .pcard__line {
+  position: relative;
+  z-index: 1;
+}
+
+.pcard__line {
+  margin-top: auto;
+  padding: 0 clamp(1.1rem, 3vw, 1.8rem) clamp(1.2rem, 3vw, 1.8rem);
+  font-size: clamp(1.6rem, 4.6vw, 2.5rem);
+  max-width: 14em;
+  text-shadow: 0 2px 24px rgba(9, 6, 4, 0.8);
+}
+
+/* back: the price */
+.pcard__face--back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(168, 112, 42, 0.3) 0%, transparent 70%),
+    linear-gradient(160deg, #21140b 0%, #130b06 60%, #0c0704 100%);
+}
+
+.pcard__face--back .pcard__strip {
+  border-bottom: 1px solid rgba(248, 246, 242, 0.07);
+}
+
+.pcard__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 2.6vh, 1.6rem) clamp(1.1rem, 3vw, 1.8rem) clamp(1.1rem, 2.6vh, 1.6rem);
+}
+
+.pcard__price {
+  margin-top: 0.4rem;
+  font-size: clamp(2.9rem, 12vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--cream);
+}
+
+.pcard__points {
+  margin-top: clamp(0.7rem, 2vh, 1.2rem);
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+.pcard__points li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.pcard__points li::before {
+  content: '';
+  flex: none;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.pcard__body .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* a small arch-framed photo keeps the price face tied to its room (wider cards only) */
+.pcard__thumb {
+  display: none;
+}
+
+@media (min-width: 620px) {
+  .pcard__body {
+    position: relative;
+  }
+
+  .pcard__thumb {
+    display: block;
+    position: absolute;
+    right: clamp(1.1rem, 3vw, 1.8rem);
+    bottom: clamp(1.1rem, 2.6vh, 1.6rem);
+    width: clamp(120px, 24%, 190px);
+    height: auto;
+    max-height: calc(100% - 2.4rem);
+    aspect-ratio: 3 / 4.1;
+    object-fit: cover;
+    border-radius: 999px 999px 10px 10px;
+    border: 1px solid rgba(199, 163, 93, 0.35);
+    opacity: 0.92;
+  }
+}
+
+/* combo card rows */
+.pcard__rows {
+  margin-top: 0.6rem;
+  display: grid;
+}
+
+.pcard__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.2rem 1rem;
+  padding: clamp(0.7rem, 2vh, 1.1rem) 0;
+  border-bottom: 1px solid rgba(248, 246, 242, 0.08);
+}
+
+.pcard__row-label {
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+}
+
+.pcard__row-label small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.pcard__row-price {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.7rem, 6vw, 2.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.pcard__row a {
+  grid-column: 1 / -1;
+  justify-self: start;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.15rem;
+}
+
+/* ---------- desktop: sticky aside + deck ---------- */
+
+@media (min-width: 1024px) {
+  .pricing {
+    --strip-h: 60px;
+    --stack-top: calc(var(--nav-h) + 3vh);
+    --card-h: min(520px, calc(100vh - var(--stack-top) - 3 * var(--strip-h) - 5vh));
+  }
+
+  .pricing__inner {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    column-gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
+
+  .pricing__aside {
+    display: block;
+    position: sticky;
+    top: calc(var(--nav-h) + 5vh);
+  }
+
+  .pricing__tabs {
+    position: relative;
+    top: auto;
+    margin: 2.4rem 0 0;
+    max-width: 27rem;
+  }
+
+  .pricing__notes {
+    margin-top: 1.8rem;
+    max-width: 27rem;
+  }
+
+  .pricing__notes li {
+    padding: 0.85rem 1.1rem 0.9rem;
+  }
+}
+
+/* ---------- no flip / no stack: lite mode and very short screens ---------- */
+
+html.lite .pcard,
+.pricing.is-flat .pcard {
+  position: relative;
+  top: auto;
+  height: auto;
+  min-height: 0;
+  margin-bottom: 1rem;
+}
+
+html.lite .stack,
+.pricing.is-flat .stack {
+  padding-bottom: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+html.lite .pcard__face--front,
+.pricing.is-flat .pcard__face--front {
+  display: none;
+}
+
+html.lite .pcard__face--back,
+.pricing.is-flat .pcard__face--back {
+  position: relative;
+  transform: none;
+  box-shadow: none;
+}
+
+html.lite .pcard__body .btn,
+.pricing.is-flat .pcard__body .btn {
+  margin-top: 1.4rem;
+}
+
+html.lite .pcard__thumb,
+.pricing.is-flat .pcard__thumb {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  html.lite .stack,
+  .pricing.is-flat .stack {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  html.lite .pcard,
+  .pricing.is-flat .pcard {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,223 @@
+/* ==========================================================================
+   7. Rules — a clean accordion with icons (rules.js)
+   ========================================================================== */
+
+.rules {
+  position: relative;
+  padding: clamp(5.5rem, 14vh, 10rem) var(--pad);
+  background:
+    radial-gradient(50% 40% at 100% 30%, rgba(47, 143, 111, 0.12) 0%, transparent 100%),
+    linear-gradient(180deg, #0f0906 0%, var(--night) 100%);
+}
+
+.rules__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.rules__head h2 {
+  margin: 1.3rem 0 1.4rem;
+  font-size: clamp(2.2rem, 4.8vw, 3.9rem);
+}
+
+.rules__head > p {
+  max-width: 30rem;
+  color: var(--text-soft);
+}
+
+.rules__photo {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .rules__inner {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+
+  .rules__head {
+    position: sticky;
+    top: calc(var(--nav-h) + 5vh);
+  }
+
+  .rules__photo {
+    display: block;
+    margin-top: 2.6rem;
+    width: min(100%, 300px);
+    border-radius: 999px 999px 14px 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .rules__photo img {
+    width: 100%;
+    aspect-ratio: 3 / 3.9;
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+}
+
+@media (min-width: 960px) and (max-height: 820px) {
+  .rules__photo {
+    display: none;
+  }
+}
+
+/* ---------- accordion ---------- */
+
+.rules__list {
+  border-top: 1px solid var(--line);
+}
+
+.rule {
+  border-bottom: 1px solid var(--line-soft);
+  transition: border-color 0.4s;
+}
+
+.rule.is-open {
+  border-bottom-color: var(--line);
+}
+
+.rule__btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(0.9rem, 2.4vw, 1.5rem);
+  padding: clamp(1.1rem, 2.6vh, 1.5rem) 0;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rule__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition: color 0.45s var(--ease-out), background-color 0.45s var(--ease-out), border-color 0.45s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.rule.is-open .rule__icon {
+  color: var(--ink);
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: rotate(-8deg);
+}
+
+.rule__label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.rule__no {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--text-faint);
+}
+
+.rule__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 3.4vw, 1.72rem);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  transition: color 0.35s;
+}
+
+.rule.is-open .rule__title {
+  color: var(--gold-light);
+}
+
+.rule__chev {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  color: var(--text-soft);
+  transition: transform 0.6s var(--ease-out), color 0.3s;
+}
+
+.rule__chev::before,
+.rule__chev::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 15px;
+  height: 1.5px;
+  margin: -0.75px 0 0 -7.5px;
+  background: currentColor;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.rule__chev::after {
+  transform: rotate(90deg);
+}
+
+.rule.is-open .rule__chev {
+  color: var(--gold);
+  transform: rotate(180deg);
+}
+
+.rule.is-open .rule__chev::after {
+  transform: rotate(0deg);
+}
+
+@media (hover: hover) {
+  .rule__btn:hover .rule__title {
+    color: var(--gold-light);
+  }
+}
+
+/* height animates with the grid-rows trick, no JS measuring */
+.rule__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.65s var(--ease-out);
+}
+
+.rule.is-open .rule__panel {
+  grid-template-rows: 1fr;
+}
+
+.rule__panel > div {
+  overflow: hidden;
+}
+
+.rule__panel p {
+  max-width: 40rem;
+  padding: 0 0 clamp(1.3rem, 3vh, 1.8rem) calc(46px + clamp(0.9rem, 2.4vw, 1.5rem));
+  color: var(--text-soft);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.rule.is-open .rule__panel p {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+
+@media (max-width: 520px) {
+  .rule__panel p {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rule__panel,
+  .rule__panel p,
+  .rule__icon,
+  .rule__chev,
+  .rule__chev::after {
+    transition: none;
+  }
+}

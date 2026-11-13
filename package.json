@@ -1,0 +1,9 @@
+{
+  "name": "amaris-content-studios",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Amaris Content Studios, an aesthetic rental content studio in Ekpoma, Edo State, Nigeria.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

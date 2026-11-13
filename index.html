@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Amaris Content Studios | Aesthetic Rental Content Studio in Ekpoma, Edo State</title>
+    <meta
+      name="description"
+      content="Amaris Content Studios is an aesthetic rental content studio in Ekpoma, Edo State. Three styled rooms (Minimalist, Emerald and Ile Oba) for photoshoots, reels and creators. Book on WhatsApp."
+    />
+    <meta name="theme-color" content="#0b0705" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Amaris Content Studios | Create. Capture. Inspire." />
+    <meta
+      property="og:description"
+      content="An aesthetic rental content studio in Ekpoma, Edo State. Three styled rooms for photoshoots, reels and creators."
+    />
+    <meta property="og:image" content="assets/og-cover.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <link rel="preload" href="assets/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/outfit-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/loader.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/rooms.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
+    <link rel="stylesheet" href="css/pricing.css" />
+    <link rel="stylesheet" href="css/rules.css" />
+    <link rel="stylesheet" href="css/booking.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+
+    <script>
+      // Flag JS as available before first paint, and never let the loader trap the page.
+      document.documentElement.classList.replace('no-js', 'js');
+      window.__loaderFailsafe = setTimeout(function () {
+        document.documentElement.classList.add('loader-skip');
+      }, 12000);
+    </script>
+    <link rel="modulepreload" href="vendor/gsap.min.js" />
+    <link rel="modulepreload" href="vendor/lenis.min.js" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ================= 1. LOADER: the AS logo on a dark amber door ================= -->
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="loader__door loader__door--l">
+        <div class="loader__inlay"></div>
+        <div class="loader__brand">
+          <span class="loader__mark"></span>
+          <span class="loader__name">Amaris Content Studios</span>
+        </div>
+      </div>
+      <div class="loader__door loader__door--r">
+        <div class="loader__inlay"></div>
+        <div class="loader__brand">
+          <span class="loader__mark"></span>
+          <span class="loader__name">Amaris Content Studios</span>
+        </div>
+      </div>
+      <div class="loader__seam"></div>
+      <div class="loader__meta">
+        <span class="loader__label">Setting the scene</span>
+        <span class="loader__pct">00</span>
+      </div>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ================= NAVIGATION ================= -->
+    <header class="nav" id="nav">
+      <a class="nav__logo" href="#home" aria-label="Amaris Content Studios, back to top">
+        <img src="assets/logo/amaris-logo.svg" alt="Amaris Studio" width="152" height="35" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#rooms" data-nav="rooms">Rooms</a>
+        <a href="#gallery" data-nav="gallery">Gallery</a>
+        <a href="#pricing" data-nav="pricing">Pricing</a>
+        <a href="#rules" data-nav="rules">Rules</a>
+        <a href="#book" data-nav="book" class="nav__book">Book Now</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <div class="menu" id="menu" aria-hidden="true">
+      <nav class="menu__links" aria-label="Mobile">
+        <a href="#home"><span>01</span>Home</a>
+        <a href="#rooms"><span>02</span>Rooms</a>
+        <a href="#gallery"><span>03</span>Gallery</a>
+        <a href="#pricing"><span>04</span>Pricing</a>
+        <a href="#rules"><span>05</span>Rules</a>
+        <a href="#book"><span>06</span><em>Book Now</em></a>
+        <a href="#contact"><span>07</span>Contact</a>
+      </nav>
+      <div class="menu__foot">
+        <a href="https://wa.me/2348034750928" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/amarisstudio_ng" target="_blank" rel="noopener">Instagram</a>
+        <span>Ekpoma, Edo State</span>
+      </div>
+    </div>
+
+    <main id="main" tabindex="-1">
+      <!-- ================= 2. HERO: push through the arched doorway ================= -->
+      <section class="hero" id="home" data-section="home">
+        <div class="hero__sticky">
+          <div class="stage-slot"></div>
+
+          <!-- lite / no-WebGL fallback -->
+          <div class="hero__fallback" aria-hidden="true">
+            <div class="hero__fallback-arch">
+              <img src="assets/img/portrait-golden-arch-800.webp" alt="" width="800" height="1067" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          <div class="hero__scrim" aria-hidden="true"></div>
+
+          <div class="hero__content">
+            <p class="eyebrow hero__eyebrow"><span>Est. 2025 &mdash; Ekpoma, Edo State</span></p>
+            <h1 class="hero__title display" aria-label="Create. Capture. Inspire.">
+              <span class="hero__line hero__line--1" aria-hidden="true">Create.</span>
+              <span class="hero__line hero__line--2" aria-hidden="true">Capture.</span>
+              <span class="hero__line hero__line--3" aria-hidden="true"><em>Inspire.</em></span>
+            </h1>
+            <div class="hero__sub">
+              <p class="hero__lede">
+                An aesthetic rental content studio in Ekpoma. Three styled rooms made for photoshoots, reels and the
+                creators who obsess over the details.
+              </p>
+              <div class="hero__cta">
+                <a
+                  class="btn btn--gold"
+                  href="https://wa.me/2348034750928?text=Hello%20Amaris%20Content%20Studios!%20I%27d%20like%20to%20book%20a%20session."
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span data-icon="whatsapp"></span>Book on WhatsApp
+                </a>
+                <a class="btn btn--ghost" href="#rooms">Explore Studio Rooms</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__interlude" aria-hidden="true">
+            <p class="eyebrow">Step inside</p>
+            <p class="display">Three styled rooms.<br /><em>One address in Ekpoma.</em></p>
+          </div>
+
+          <div class="hero__hint" aria-hidden="true"><span>Scroll to step inside</span><i></i></div>
+          <div class="hero__veil" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- ================= 3. ABOUT: photo cards drifting in depth ================= -->
+      <section class="about" id="about" data-section="about">
+        <div class="about__glow" aria-hidden="true"></div>
+        <div class="about__inner">
+          <div class="about__copy">
+            <p class="eyebrow" data-reveal>The Studio</p>
+            <h2 class="display about__title" data-reveal>Walk in with an idea. <em>Walk out with a body of work.</em></h2>
+            <p class="about__lede" data-reveal>
+              Amaris Content Studios is Ekpoma&rsquo;s home for beautiful content: a rental studio where every wall,
+              texture and corner has been styled to look effortless on camera.
+            </p>
+            <p data-reveal>
+              Three distinct rooms, flattering light and furniture you will actually want in frame. Whether it is a
+              birthday shoot, a brand campaign or thirty seconds of reel magic, the space does the heavy lifting so you
+              can focus on the shot.
+            </p>
+            <ul class="about__features" data-reveal>
+              <li><strong>Three styled sets</strong><span>Minimalist, Emerald and Ile Oba, each with its own mood.</span></li>
+              <li><strong>Photo and video ready</strong><span>Built for stills, reels and everything in between.</span></li>
+              <li><strong>Creator first</strong><span>Come solo, with your photographer or with the whole team.</span></li>
+              <li><strong>Flexible sessions</strong><span>Single, couple and family packages, with time to spare.</span></li>
+            </ul>
+            <dl class="about__stats" data-reveal>
+              <div><dt>Styled rooms</dt><dd>03</dd></div>
+              <div><dt>Established</dt><dd>2025</dd></div>
+              <div><dt>Sessions from</dt><dd>&#8358;35k</dd></div>
+            </dl>
+          </div>
+
+          <div class="about__cloud" data-cloud>
+            <div class="about__cloud-inner">
+              <figure class="acard" style="--x: 3%; --y: 3%; --w: 41%; --z: -130px; --r: -5deg" data-depth="0.5">
+                <div class="acard__par"><div class="acard__drift">
+                  <img src="assets/img/minimalist-duo-white-480.webp" srcset="assets/img/minimalist-duo-white-480.webp 480w, assets/img/minimalist-duo-white-800.webp 800w" sizes="(min-width: 960px) 20vw, 40vw" alt="Two women in white seated on a boucl&eacute; sofa in the Minimalist Room" width="480" height="640" loading="lazy" decoding="async" />
+                  <figcaption>Minimalist</figcaption>
+                </div></div>
+              </figure>
+              <figure class="acard acard--tall" style="--x: 56%; --y: 0%; --w: 33%; --z: -280px; --r: 4deg" data-depth="0.25">
+                <div class="acard__par"><div class="acard__drift">
+                  <img src="assets/img/room-emerald-shelves-480.webp" srcset="assets/img/room-emerald-shelves-480.webp 480w, assets/img/room-emerald-shelves-800.webp 800w" sizes="(min-width: 960px) 16vw, 33vw" alt="The Emerald Room with LED-lit bookshelves and a cream sofa" width="480" height="853" loading="lazy" decoding="async" />
+                  <figcaption>Emerald</figcaption>
+                </div></div>
+              </figure>
+              <figure class="acard" style="--x: 27%; --y: 33%; --w: 45%; --z: 70px; --r: 2deg" data-depth="1">
+                <div class="acard__par"><div class="acard__drift">
+                  <img src="assets/img/ile-oba-couple-480.webp" srcset="assets/img/ile-oba-couple-480.webp 480w, assets/img/ile-oba-couple-800.webp 800w" sizes="(min-width: 960px) 22vw, 45vw" alt="A couple in traditional attire in the Ile Oba Room" width="480" height="640" loading="lazy" decoding="async" />
+                  <figcaption>Ile Oba</figcaption>
+                </div></div>
+              </figure>
+              <figure class="acard" style="--x: 0%; --y: 60%; --w: 30%; --z: -30px; --r: -3deg" data-depth="0.7">
+                <div class="acard__par"><div class="acard__drift">
+                  <img src="assets/img/minimalist-red-set-480.webp" alt="A creator in a red two-piece in the Minimalist Room" width="480" height="639" loading="lazy" decoding="async" />
+                </div></div>
+              </figure>
+              <figure class="acard" style="--x: 67%; --y: 57%; --w: 32%; --z: 140px; --r: 6deg" data-depth="1.25">
+                <div class="acard__par"><div class="acard__drift">
+                  <img src="assets/img/ile-oba-agbada-480.webp" alt="A man in a red agbada seated in the Ile Oba Room" width="480" height="640" loading="lazy" decoding="async" />
+                </div></div>
+              </figure>
+            </div>
+            <button class="about__gyro" type="button" hidden>Tap to tilt with your phone</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>Photoshoots</span><i></i><span><em>Reels</em></span><i></i><span>Brand campaigns</span><i></i><span><em>Birthdays</em></span><i></i><span>Couples</span><i></i><span><em>Family portraits</em></span><i></i><span>Music videos</span><i></i><span><em>Editorials</em></span><i></i>
+          <span>Photoshoots</span><i></i><span><em>Reels</em></span><i></i><span>Brand campaigns</span><i></i><span><em>Birthdays</em></span><i></i><span>Couples</span><i></i><span><em>Family portraits</em></span><i></i><span>Music videos</span><i></i><span><em>Editorials</em></span><i></i>
+        </div>
+      </div>
+
+      <!-- ================= 4. ROOMS: the 3D hallway ================= -->
+      <section class="rooms" id="rooms" data-section="rooms">
+        <div class="rooms__sticky">
+          <div class="stage-slot"></div>
+          <div class="rooms__grade" aria-hidden="true"></div>
+
+          <header class="rooms__intro">
+            <p class="eyebrow">The Rooms</p>
+            <h2 class="display">Three rooms. <em>Infinite frames.</em></h2>
+            <p class="rooms__intro-note">Keep scrolling. The hallway is yours.</p>
+          </header>
+
+          <!-- room cards are rendered from js/data/studio.js -->
+          <div class="rooms__cards"></div>
+
+          <ol class="rooms__steps" aria-label="Jump to a room"></ol>
+          <div class="rooms__veil" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- ================= 5. GALLERY: the photo ring ================= -->
+      <section class="gallery" id="gallery" data-section="gallery">
+        <div class="gallery__sticky">
+          <div class="stage-slot"></div>
+
+          <header class="gallery__head">
+            <p class="eyebrow">Gallery</p>
+            <h2 class="display">Shot at <em>Amaris.</em></h2>
+            <p class="gallery__hint">
+              <span class="only-full"><span class="only-hover">Scroll to turn &middot; hover to tilt &middot; click to step closer</span><span class="only-touch">Scroll or swipe to turn &middot; tap to step closer</span></span>
+              <span class="only-lite">Swipe through &middot; open any photo to step closer</span>
+            </p>
+          </header>
+
+          <div class="gallery__caption" aria-live="polite">
+            <button class="gallery__arrow" type="button" data-gallery-prev aria-label="Previous photo"><span data-icon="arrow"></span></button>
+            <div class="gallery__caption-text">
+              <span class="gallery__count">01 / 14</span>
+              <p class="gallery__text"></p>
+              <button class="gallery__open" type="button" data-gallery-open>View photo</button>
+            </div>
+            <button class="gallery__arrow" type="button" data-gallery-next aria-label="Next photo"><span data-icon="arrow"></span></button>
+          </div>
+
+          <!-- lite / no-WebGL fallback: a swipeable strip, rendered from data -->
+          <div class="gallery__strip"></div>
+        </div>
+      </section>
+
+      <!-- ================= 6. PRICING: sticky stacked flip cards ================= -->
+      <section class="pricing" id="pricing" data-section="pricing">
+        <div class="pricing__inner">
+          <div class="pricing__aside">
+            <header class="pricing__head">
+              <p class="eyebrow" data-reveal>Pricing</p>
+              <h2 class="display" data-reveal>Clear rates. <em>No surprises.</em></h2>
+              <p class="pricing__lede" data-reveal>
+                Choose who is in front of the camera. Every session comes with the fully styled set, props and
+                furniture.
+              </p>
+            </header>
+            <div class="pricing__tabs" role="tablist" aria-label="Session type"></div>
+            <ul class="pricing__notes"></ul>
+          </div>
+          <div class="pricing__panels"></div>
+        </div>
+      </section>
+
+      <!-- ================= 7. RULES: accordion ================= -->
+      <section class="rules" id="rules" data-section="rules">
+        <div class="rules__inner">
+          <header class="rules__head">
+            <p class="eyebrow" data-reveal>House Rules</p>
+            <h2 class="display" data-reveal>A few rules, <em>so every shoot runs beautifully.</em></h2>
+            <p data-reveal>
+              The studio stays camera-ready because everyone who books it looks after it. Please read these before
+              your session.
+            </p>
+            <figure class="rules__photo" data-reveal>
+              <img src="assets/img/room-minimalist-arches-800.webp" srcset="assets/img/room-minimalist-arches-480.webp 480w, assets/img/room-minimalist-arches-800.webp 800w" sizes="(min-width: 960px) 24vw, 60vw" alt="The Minimalist Room with white arch shelving and a boucl&eacute; chair" width="800" height="1422" loading="lazy" decoding="async" />
+            </figure>
+          </header>
+          <div class="rules__list"></div>
+        </div>
+      </section>
+
+      <!-- ================= 8. BOOK NOW: build a WhatsApp booking ================= -->
+      <section class="booking" id="book" data-section="book">
+        <div class="booking__glow" aria-hidden="true"></div>
+        <div class="booking__inner">
+          <header class="booking__head">
+            <p class="eyebrow" data-reveal>Book Now</p>
+            <h2 class="display" data-reveal>Reserve your <em>session.</em></h2>
+            <p data-reveal>
+              Pick your package, room and date. We turn it into a ready-to-send WhatsApp message, and you just press
+              send.
+            </p>
+          </header>
+
+          <div class="booking__grid">
+            <form class="bform" id="booking-form" novalidate>
+              <fieldset class="bform__step">
+                <legend><span>01</span>Who is in front of the camera?</legend>
+                <div class="seg" role="radiogroup" aria-label="Package">
+                  <label><input type="radio" name="pkg" value="single" checked /><span>Single</span></label>
+                  <label><input type="radio" name="pkg" value="couple" /><span>Couple</span></label>
+                  <label><input type="radio" name="pkg" value="group" /><span>Family / Group</span></label>
+                </div>
+                <p class="bform__blurb" data-pkg-blurb></p>
+                <div class="bform__field bform__size" data-group-only hidden>
+                  <label for="bf-size">Group size</label>
+                  <select id="bf-size" name="size"></select>
+                  <small>Children under 10 are not charged, so leave them out of the count.</small>
+                </div>
+              </fieldset>
+
+              <fieldset class="bform__step">
+                <legend><span>02</span>Pick your room</legend>
+                <p class="bform__hint" data-room-hint></p>
+                <div class="roompick" data-roompick></div>
+                <p class="bform__error" data-error="rooms" hidden>Choose at least one room to continue.</p>
+              </fieldset>
+
+              <fieldset class="bform__step">
+                <legend><span>03</span>Date and details</legend>
+                <div class="bform__row">
+                  <div class="bform__field">
+                    <label for="bf-date">Preferred date</label>
+                    <input id="bf-date" name="date" type="date" required />
+                    <p class="bform__error" data-error="date" hidden>Pick a date for your session.</p>
+                  </div>
+                  <div class="bform__field">
+                    <label for="bf-time">Preferred time <i>optional</i></label>
+                    <input id="bf-time" name="time" type="time" />
+                  </div>
+                </div>
+                <div class="bform__row">
+                  <div class="bform__field">
+                    <label for="bf-extra">Extra time</label>
+                    <select id="bf-extra" name="extra">
+                      <option value="none">No extra time</option>
+                      <option value="30">Add 30 minutes (+&#8358;19,000)</option>
+                      <option value="60">Add a full hour (&#8358;10,000 off)</option>
+                    </select>
+                  </div>
+                  <div class="bform__field">
+                    <label for="bf-name">Your name <i>optional</i></label>
+                    <input id="bf-name" name="name" type="text" autocomplete="name" placeholder="So we know who to expect" />
+                  </div>
+                </div>
+                <div class="bform__field">
+                  <label for="bf-notes">Anything we should know? <i>optional</i></label>
+                  <textarea id="bf-notes" name="notes" rows="2" placeholder="Shoot concept, number of outfits, equipment you would like to bring"></textarea>
+                </div>
+              </fieldset>
+            </form>
+
+            <aside class="ticket" aria-label="Your booking summary">
+              <div class="ticket__card">
+                <div class="ticket__top">
+                  <span class="ticket__mark" aria-hidden="true"></span>
+                  <div>
+                    <p class="eyebrow">Booking pass</p>
+                    <p class="ticket__title display" data-ticket="title">Your session</p>
+                  </div>
+                </div>
+                <dl class="ticket__rows">
+                  <div><dt>Package</dt><dd data-ticket="pkg">Single user</dd></div>
+                  <div><dt>Room</dt><dd data-ticket="rooms">Not chosen yet</dd></div>
+                  <div><dt>Date</dt><dd data-ticket="date">Not chosen yet</dd></div>
+                  <div><dt>Session</dt><dd data-ticket="duration">Per session</dd></div>
+                </dl>
+                <div class="ticket__total">
+                  <span>Estimated total</span>
+                  <strong class="display" data-ticket="total">&#8358;0</strong>
+                  <small data-ticket="note">Final total is confirmed by the studio on WhatsApp.</small>
+                </div>
+                <div class="ticket__tear" aria-hidden="true"></div>
+                <div class="ticket__msg">
+                  <p class="eyebrow">Your WhatsApp message</p>
+                  <pre data-ticket="message"></pre>
+                </div>
+                <div class="ticket__actions">
+                  <a class="btn btn--gold btn--block" data-ticket="send" href="https://wa.me/2348034750928" target="_blank" rel="noopener">
+                    <span data-icon="whatsapp"></span>Send on WhatsApp
+                  </a>
+                  <button class="btn btn--ghost btn--block" type="button" data-ticket="copy"><span data-icon="copy"></span><span data-copy-label>Copy message</span></button>
+                </div>
+                <p class="ticket__to">Sends to <strong>+234 803 475 0928</strong></p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 9. CONTACT ================= -->
+      <section class="contact" id="contact" data-section="contact">
+        <div class="contact__mark-wrap" aria-hidden="true">
+          <div class="contact__mark"></div>
+        </div>
+        <div class="contact__inner">
+          <p class="eyebrow" data-reveal>Contact</p>
+          <h2 class="display contact__title" data-reveal>Let&rsquo;s make something <em>worth framing.</em></h2>
+          <p class="contact__lede" data-reveal>
+            Questions, custom shoots or a quick look around before you book: message the studio and we will take it
+            from there.
+          </p>
+
+          <div class="contact__links">
+            <a class="clink" href="https://wa.me/2348034750928" target="_blank" rel="noopener" data-reveal>
+              <span class="clink__icon" data-icon="whatsapp"></span>
+              <span class="eyebrow">WhatsApp</span>
+              <strong>+234 803 475 0928</strong>
+              <span class="clink__go">Chat with the studio <span data-icon="arrowUpRight"></span></span>
+            </a>
+            <a class="clink" href="https://instagram.com/amarisstudio_ng" target="_blank" rel="noopener" data-reveal>
+              <span class="clink__icon" data-icon="instagram"></span>
+              <span class="eyebrow">Instagram</span>
+              <strong>@amarisstudio_ng</strong>
+              <span class="clink__go">See the latest shoots <span data-icon="arrowUpRight"></span></span>
+            </a>
+            <a class="clink" href="https://www.google.com/maps/search/?api=1&query=Zanna+Estate%2C+Benin-Auchi+Expressway%2C+Ekpoma%2C+Edo+State%2C+Nigeria" target="_blank" rel="noopener" data-reveal>
+              <span class="clink__icon" data-icon="pin"></span>
+              <span class="eyebrow">Find us</span>
+              <strong>Zanna Estate, along Benin&ndash;Auchi Expressway, Ekpoma, Edo State</strong>
+              <span class="clink__go">Open in Google Maps <span data-icon="arrowUpRight"></span></span>
+            </a>
+          </div>
+
+          <p class="contact__more" data-reveal>
+            <a href="mailto:contact@theamarisstudio.com"><span data-icon="mail"></span>contact@theamarisstudio.com</a>
+            <a href="https://tiktok.com/@amarisstudios.ng" target="_blank" rel="noopener"><span data-icon="tiktok"></span>@amarisstudios.ng on TikTok</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__top">
+        <a class="footer__logo" href="#home" aria-label="Back to top">
+          <img src="assets/logo/amaris-logo.svg" alt="Amaris Studio" width="190" height="44" loading="lazy" />
+        </a>
+        <p class="footer__tag display">Create. Capture. <em>Inspire.</em></p>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#home">Home</a>
+          <a href="#rooms">Rooms</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#rules">Rules</a>
+          <a href="#book">Book Now</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; <span data-year>2026</span> Amaris Content Studios. All rights reserved.</p>
+        <p>Est. 2025 &middot; Ekpoma, Edo State, Nigeria</p>
+      </div>
+    </footer>
+
+    <a class="wa-fab" href="https://wa.me/2348034750928" target="_blank" rel="noopener" aria-label="Chat with Amaris Content Studios on WhatsApp">
+      <span data-icon="whatsapp"></span>
+    </a>
+
+    <!-- gallery lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+      <div class="lightbox__backdrop" data-lightbox-close></div>
+      <figure class="lightbox__figure">
+        <div class="lightbox__frame"><img class="lightbox__img" alt="" /></div>
+        <figcaption class="lightbox__caption"><span class="lightbox__count"></span><span class="lightbox__text"></span></figcaption>
+      </figure>
+      <button class="lightbox__btn lightbox__btn--close" type="button" data-lightbox-close aria-label="Close photo"><span data-icon="close"></span></button>
+      <button class="lightbox__btn lightbox__btn--prev" type="button" data-lightbox-prev aria-label="Previous photo"><span data-icon="arrow"></span></button>
+      <button class="lightbox__btn lightbox__btn--next" type="button" data-lightbox-next aria-label="Next photo"><span data-icon="arrow"></span></button>
+    </div>
+
+    <noscript>
+      <p class="noscript">
+        This site uses JavaScript for its interactive rooms and booking form. You can still book directly on WhatsApp:
+        <a href="https://wa.me/2348034750928">+234 803 475 0928</a>.
+      </p>
+    </noscript>
+  </body>
+</html>
