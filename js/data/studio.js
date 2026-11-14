@@ -267,48 +267,43 @@ export function quote({ pkg, rooms = [], size = '3', extra = 'none' }) {
 
 export const RULES = [
   {
-    icon: 'clock',
-    title: 'Be on time',
-    text: 'Your session starts at the time you booked, not when you arrive. Come ten to fifteen minutes early to settle in, because time lost to late arrival comes out of your slot so the next creator can start on schedule.',
-  },
-  {
     icon: 'receipt',
-    title: 'Booking and payment',
-    text: 'A date is only held once your booking is confirmed on WhatsApp and your payment has been received. No confirmation means no reservation, so please wait for ours before you plan your shoot day.',
+    title: 'Book 24 hours ahead',
+    text: 'All bookings must be made at least 24 hours in advance. Your payment is what confirms the reservation, and payments are non-refundable.',
   },
   {
     icon: 'calendar',
     title: 'Rescheduling',
-    text: 'Plans change. Tell us at least 24 hours before your session and we will move you to the next available slot. Late changes and no-shows cannot be carried over.',
+    text: 'You can reschedule up to 24 hours before your session. Ask at least 3 hours before your booked time so we can move you to another slot.',
   },
   {
-    icon: 'armchair',
-    title: 'Care for props and furniture',
-    text: 'Everything on set is there to be used, gently. Please do not drag furniture, stand on seating or take props between rooms without asking. Breakages and damage are billed to the booking.',
-  },
-  {
-    icon: 'light',
-    title: 'Lighting and equipment',
-    text: 'The rooms are lit and styled to shoot beautifully as they are. Outside lighting, backdrops, smoke machines and heavy equipment need our approval before your session, so mention them when you book.',
-  },
-  {
-    icon: 'sparkle',
-    title: 'Keep it clean',
-    text: 'No food or drinks on set, and no confetti, glitter, powder, oils or open flames without approval. Leave each room the way you met it, with your belongings and rubbish taken with you.',
+    icon: 'clock',
+    title: '10-minute grace period',
+    text: 'We allow a 10-minute grace period. After that, lateness attracts a ₦5,000 fee, or an extra-time charge if another client is booked after you. If the extra time is not paid for, your session continues within the time you have left.',
   },
   {
     icon: 'people',
-    title: 'Guests and little ones',
-    text: 'Bring only the people your shoot needs so the set stays calm and clear. Children are very welcome and must be supervised by an adult at all times.',
+    title: 'One guest per client',
+    text: 'Each client may bring one guest. Guests are not allowed to record or take pictures of themselves in the studio. Please respect the space and keep things professional at all times.',
+  },
+  {
+    icon: 'armchair',
+    title: 'Care for props and sets',
+    text: 'Handle all props, equipment and sets with care. Any damage will be billed to the client responsible.',
   },
   {
     icon: 'hanger',
-    title: 'Outfit changes and wrap-up',
-    text: 'Changing is part of your session time, so plan your looks in advance. Start wrapping up five minutes before the end. If you need longer, ask us about extra time before your slot runs out.',
+    title: 'Outfit changes',
+    text: 'If you have outfit changes, arrive at least 30 minutes early. Shoot time starts strictly at your booked hour.',
+  },
+  {
+    icon: 'light',
+    title: 'Photographers and lighting',
+    text: 'External photographers are welcome. Your photographer may bring their own lights and props, but must follow all studio rules.',
   },
   {
     icon: 'heart',
-    title: 'Respect the space',
-    text: 'Amaris is a shared creative home. Keep music and voices considerate, treat the team and other creators kindly, and we will do everything we can to make your shoot effortless.',
+    title: 'A shared creative space',
+    text: 'Amaris Studio is a shared space for creators. Respect fellow creators, keep it clean, and help keep the atmosphere inspiring for everyone.',
   },
 ];

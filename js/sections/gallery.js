@@ -2,10 +2,10 @@
  * 5. Gallery — scroll rotates the photo ring, hovering tilts a photo, a click
  * (or tap) zooms into it. Without WebGL the same photos become a swipeable strip.
  */
-import { gsap, ScrollTrigger } from '../vendor.js?v=5';
-import { qs, qsa, fragment, esc } from '../core/dom.js?v=5';
-import { GALLERY, PHOTOS, img } from '../data/studio.js?v=5';
-import { createLightbox } from './lightbox.js?v=5';
+import { gsap, ScrollTrigger } from '../vendor.js?v=6';
+import { qs, qsa, fragment, esc } from '../core/dom.js?v=6';
+import { GALLERY, PHOTOS, img } from '../data/studio.js?v=6';
+import { createLightbox } from './lightbox.js?v=6';
 
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -39,7 +39,7 @@ export async function initGallery(ctx) {
   }
 
   /* ---------- full: the ring ---------- */
-  const { createGalleryScene } = await import('./gallery.scene.js?v=5');
+  const { createGalleryScene } = await import('./gallery.scene.js?v=6');
   const ring = createGalleryScene({ stage, slot: qs('.stage-slot', section), items: GALLERY });
 
   const setCaption = (i) => {

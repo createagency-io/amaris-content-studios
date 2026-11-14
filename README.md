@@ -118,9 +118,9 @@ For link previews on WhatsApp and Instagram, change the `og:image` address in `i
 
 ## Making sure visitors see your changes
 
-Phones cache scripts and styles for a while. Every script import and stylesheet link ends in `?v=5`.
+Phones cache scripts and styles for a while. Every script import and stylesheet link ends in `?v=6`.
 After you change any JS or CSS file, bump that number everywhere in one go, for example from the repo folder:
 
 ```bash
-grep -rl "?v=5" index.html js | xargs sed -i "s/?v=5/?v=6/g"
+grep -rl "?v=6" index.html js | xargs sed -i "s/?v=6/?v=7/g"
 ```

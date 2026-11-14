@@ -3,10 +3,10 @@
  * right updates live with an estimate and the exact WhatsApp message, and the
  * send button opens WhatsApp with that message pre-filled to the studio.
  */
-import { gsap } from '../vendor.js?v=5';
-import { qs, qsa, fragment, esc, icon } from '../core/dom.js?v=5';
-import { pointer } from '../core/pointer.js?v=5';
-import { ROOMS, GROUPS, PACKAGES, STUDIO, quote, naira, img, waLink, roomById, COUPLE_DURATION } from '../data/studio.js?v=5';
+import { gsap } from '../vendor.js?v=6';
+import { qs, qsa, fragment, esc, icon } from '../core/dom.js?v=6';
+import { pointer } from '../core/pointer.js?v=6';
+import { ROOMS, GROUPS, PACKAGES, STUDIO, quote, naira, img, waLink, roomById, COUPLE_DURATION } from '../data/studio.js?v=6';
 
 const HINTS = {
   single: 'Choose one room, or combine two or three for more looks in one visit.',
@@ -67,9 +67,12 @@ export function initBooking({ env }) {
     fragment(GROUPS.map((g) => `<option value="${g.id}">${esc(g.label)} · ${g.duration} · ${naira(g.price)}</option>`).join(''))
   );
 
-  // no past dates
-  const now = new Date();
-  dateInput.min = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  // house rule: bookings need at least 24 hours' notice, so the earliest date is tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const earliestDate = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+  dateInput.min = earliestDate;
+  const dateOk = (date) => !!date && date >= earliestDate;
 
   const roomInputs = qsa('input[name="room"]', form);
 
@@ -169,11 +172,11 @@ export function initBooking({ env }) {
     ticket('message').textContent = message;
 
     // the button only becomes a real WhatsApp link once a room and a date are chosen
-    const ready = sel.rooms.length > 0 && !!sel.date;
+    const ready = sel.rooms.length > 0 && dateOk(sel.date);
     sendBtn.href = ready ? waLink(message) : '#book';
     sendBtn.setAttribute('aria-disabled', String(!ready));
     sendBtn.classList.toggle('is-waiting', !ready);
-    sendLabel.textContent = ready ? 'Send on WhatsApp' : !sel.rooms.length ? 'Choose a room first' : 'Choose a date first';
+    sendLabel.textContent = ready ? 'Send on WhatsApp' : !sel.rooms.length ? 'Choose a room first' : !sel.date ? 'Choose a date first' : 'Pick tomorrow or later';
     copyBtn.disabled = !ready;
 
     if (touched) validate(sel);
@@ -182,7 +185,7 @@ export function initBooking({ env }) {
 
   function validate(sel = read()) {
     const missingRoom = !sel.rooms.length;
-    const missingDate = !sel.date;
+    const missingDate = !dateOk(sel.date);
     qs('[data-error="rooms"]', form).hidden = !missingRoom;
     qs('[data-error="date"]', form).hidden = !missingDate;
     dateInput.setAttribute('aria-invalid', String(missingDate));
