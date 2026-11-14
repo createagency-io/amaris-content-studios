@@ -2,7 +2,7 @@
  * Smooth scrolling (Lenis) wired into GSAP ScrollTrigger.
  * When the visitor prefers reduced motion Lenis is skipped and native scrolling is used.
  */
-import { gsap, ScrollTrigger, Lenis } from '../vendor.js?v=6';
+import { gsap, ScrollTrigger, Lenis } from '../vendor.js?v=7';
 
 export function initScroll(env) {
   // phones resize the viewport every time the address bar slides away: don't re-measure for that

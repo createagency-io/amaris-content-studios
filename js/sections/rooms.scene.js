@@ -7,7 +7,7 @@
  * camera along `path`, dwelling in each room; the fog colour follows the
  * camera so the whole picture re-grades as you pass under an arch.
  */
-import * as THREE from '../core/three.js?v=6';
+import * as THREE from '../core/three.js?v=7';
 import {
   archWallGeometry,
   archTrimGeometry,
@@ -19,9 +19,9 @@ import {
   framedPhoto,
   labelPlane,
   surface,
-} from '../core/kit.js?v=6';
-import { pointer } from '../core/pointer.js?v=6';
-import { PHOTOS } from '../data/studio.js?v=6';
+} from '../core/kit.js?v=7';
+import { pointer } from '../core/pointer.js?v=7';
+import { PHOTOS } from '../data/studio.js?v=7';
 
 const L = 16; // length of one room
 const W = 7.2; // hallway width

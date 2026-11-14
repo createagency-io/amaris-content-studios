@@ -11,7 +11,7 @@ export const STUDIO = {
   phoneDisplay: '+234 803 475 0928',
   instagram: 'amarisstudio_ng',
   tiktok: 'amarisstudios.ng',
-  email: 'contact@theamarisstudio.com',
+  email: 'amarisstudio84@gmail.com',
   address: 'Zanna Estate, along Benin–Auchi Expressway, Ekpoma, Edo State, Nigeria',
   // where clients pay to secure a booking (shown on the booking pass and in the WhatsApp message)
   payment: { bank: 'Moniepoint', account: '9026259819', name: 'Amaris Studio' },

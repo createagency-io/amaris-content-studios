@@ -3,9 +3,9 @@
  * and leans towards the cursor; the floating WhatsApp button appears once the
  * visitor is past the hero.
  */
-import { gsap, ScrollTrigger } from '../vendor.js?v=6';
-import { qs, qsa } from '../core/dom.js?v=6';
-import { pointer } from '../core/pointer.js?v=6';
+import { gsap, ScrollTrigger } from '../vendor.js?v=7';
+import { qs, qsa } from '../core/dom.js?v=7';
+import { pointer } from '../core/pointer.js?v=7';
 
 export function initContact({ env }) {
   const section = qs('#contact');

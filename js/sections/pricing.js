@@ -3,9 +3,9 @@
  * four sticky cards: a card pins under the previous one, then flips from its
  * photo face to its price face as you keep scrolling.
  */
-import { gsap, ScrollTrigger } from '../vendor.js?v=6';
-import { qs, qsa, fragment, esc, clamp } from '../core/dom.js?v=6';
-import { PRICING, PRICING_NOTES, PACKAGES, PHOTOS, naira, img } from '../data/studio.js?v=6';
+import { gsap, ScrollTrigger } from '../vendor.js?v=7';
+import { qs, qsa, fragment, esc, clamp } from '../core/dom.js?v=7';
+import { PRICING, PRICING_NOTES, PACKAGES, PHOTOS, naira, img } from '../data/studio.js?v=7';
 
 const TAB_ORDER = ['single', 'couple', 'group'];
 const pad = (n) => String(n).padStart(2, '0');

@@ -2,8 +2,8 @@
  * 7. Rules — an accessible accordion. One rule open at a time; the open/close
  * motion is pure CSS (grid-template-rows), this file only manages state.
  */
-import { qs, qsa, fragment, esc, icon } from '../core/dom.js?v=6';
-import { RULES } from '../data/studio.js?v=6';
+import { qs, qsa, fragment, esc, icon } from '../core/dom.js?v=7';
+import { RULES } from '../data/studio.js?v=7';
 
 const pad = (n) => String(n).padStart(2, '0');
 

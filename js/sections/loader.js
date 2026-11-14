@@ -2,8 +2,8 @@
  * 1. Loader — the AS mark fades in on a dark amber double door, a seam of
  * light appears, then the door swings open into the site.
  */
-import { gsap } from '../vendor.js?v=6';
-import { qs, qsa } from '../core/dom.js?v=6';
+import { gsap } from '../vendor.js?v=7';
+import { qs, qsa } from '../core/dom.js?v=7';
 
 const MIN_VISIBLE_MS = 1900;
 

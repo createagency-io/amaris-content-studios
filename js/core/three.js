@@ -1,2 +1,2 @@
-/** Re-exports Three.js so scene modules can `import * as THREE from '../core/three.js?v=6'`. */
-export * from '../../vendor/three.module.min.js?v=6';
+/** Re-exports Three.js so scene modules can `import * as THREE from '../core/three.js?v=7'`. */
+export * from '../../vendor/three.module.min.js?v=7';

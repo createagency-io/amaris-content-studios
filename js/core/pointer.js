@@ -3,7 +3,7 @@
  * Desktop: the mouse position. Phones: the gyroscope (device orientation).
  * Values are normalised to -1..1; use `pointer.sx / pointer.sy` for the eased version.
  */
-import { gsap } from '../vendor.js?v=6';
+import { gsap } from '../vendor.js?v=7';
 
 export const pointer = {
   x: 0,
